@@ -1,4 +1,6 @@
 %% Octave Band Filtering: Lab P-14: 4 Lab Exercises
+clear;
+close all;
 %% 4.1 Simple Bandpass Filter 
 % Use the impulse response of FIR: h(n) = (2/L)*cos(wc*n), 0 <= n < L
 %% 4.1a) Generate Bandpass with wc = 0.4*pi and L = 40, plot magnitude and phase response
@@ -287,6 +289,70 @@ figure
 plot(whalf,abs(HOctHalf),LineWidth=2)
 hold on
 xline(wc, '--r', strcat('\omega = ' , string(wc)), 'LabelOrientation', 'aligned', 'LabelVerticalAlignment','middle');
+
+%% 5.3a)
+fs = 8000;              % Sampling frequency
+t = 0:1/fs:0.85;        % Time vector from 0 to 0.85 seconds with 1/fs step
+xx = zeros(size(t));    % Initialize signal vector
+
+% Define the three time intervals
+interval1 = (t >= 0) & (t < 0.25);
+interval2 = (t >= 0.3) & (t < 0.55);
+interval3 = (t >= 0.6) & (t < 0.85);
+
+% Add sinusoids in each time interval
+xx(interval1) = cos(2*pi*220*t(interval1));
+xx(interval2) = cos(2*pi*880*t(interval2));
+xx(interval3) = cos(2*pi*440*t(interval3)) + cos(2*pi*1760*t(interval3));
+
+% Plot the signal
+figure;
+plot(t, xx);
+title('Generated Signal x(t)');
+xlabel('Time (s)');
+ylabel('Amplitude');
+grid on;
+
+%% 5.3b)
+% Frequency bands for 5 BPF
+bands = [BP_Filters(2, "StartingFreq_Hz_"), BP_Filters(2, "EndingFreq_Hz_"); 
+        BP_Filters(3, "StartingFreq_Hz_"), BP_Filters(3, "EndingFreq_Hz_"); 
+        BP_Filters(4, "StartingFreq_Hz_"), BP_Filters(4, "EndingFreq_Hz_");
+        BP_Filters(5, "StartingFreq_Hz_"), BP_Filters(5, "EndingFreq_Hz_");
+        BP_Filters(6, "StartingFreq_Hz_"), BP_Filters(6, "EndingFreq_Hz_");];
+L = 101;                 % Filter length
+N = 1024;                % FFT size for frequency response
+numBands = size(bands, 1);
+filterOutputs = zeros(numBands, length(xx)); % To store filter outputs
+
+% Plot Frequency Responses for All Filters
+figure;
+for i = 1:numBands
+    % Calculate center frequency and normalized cutoff
+    fc = (bands{i, "StartingFreq_Hz_"} + bands{i, "EndingFreq_Hz_"}) / 2;
+    wc = 2 * pi * fc / fs; % Convert to normalized frequency
+    
+    % Call HammingNorm to generate frequency response
+    H = HammingNorm(wc, L, N); % Obtain frequency response
+    
+    % Apply the filter (IFFT to create time-domain filter coefficients)
+    h = ifft(ifftshift(H), 'symmetric');
+    h = h(1:L); % Trim to filter length
+    
+    % Filter the signal
+    filterOutputs(i, :) = filter(h, 1, xx);
+end
+    
+%% 5.3c)
+for i = 1:numBands
+    subplot(numBands, 1, i);
+    plot(t, filterOutputs(i, :));
+    title(['Filter Output for Band ', num2str(bands{i, "StartingFreq_Hz_"}), ...
+        '-', num2str(bands{i, "EndingFreq_Hz_"}), ' Hz']);
+    xlabel('Time (s)');
+    ylabel('Amplitude');
+    grid on;
+end
 %%  Project Functions
 
 % Simple Band Pass Filter (4.1a)
