@@ -18,7 +18,7 @@ H = BPFsimp(wc, L, N); % Obtain frequency response of Bandpass filter
 idx = N/2 + 1; % Define start index for positive frequencies
 
 % Plot magnitude of the frequency response
-figure; clf;
+figure(1); clf;
 plot(w(idx:end), abs(H(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -33,7 +33,7 @@ yline(1, '--')
 % the threshold level we choose for our passband cannot be too close to 0.
 
 % Plot phase for frequency response 
-figure; clf;
+figure(2); clf;
 plot(w(idx:end), angle(H(idx:end)));
 title('Phase of Frequency Response');
 xlabel('\omega (rad)');
@@ -62,7 +62,7 @@ fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L 
 H20 = BPFsimp(wc, 20, N);
 
 % Plot magnitude of the frequency response for L = 20 BPF
-figure; clf;
+figure(3); clf;
 plot(w(idx:end), abs(H20(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -84,7 +84,7 @@ fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L 
 H80 = BPFsimp(wc, 80, N);
 
 % Plot magnitude of the frequency response for L = 80 BPF
-figure; clf;
+figure(4); clf;
 plot(w(idx:end), abs(H80(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -122,7 +122,7 @@ H = BPFbetter(wc, L, N);
 idx = N/2 + 1; % Define start index for positive frequencies
 
 % Plot magnitude of the frequency response
-figure; clf;
+figure(5); clf;
 plot(w(idx:end), abs(H(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -136,7 +136,7 @@ xline(0.7854, '--r', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'Label
 % lobe. This suggests our passband threshold can be much closer to 0   
 
 % Plot phase for frequency response 
-figure; clf;
+figure(6); clf;
 plot(w(idx:end), angle(H(idx:end)));
 title('Phase of Frequency Response');
 xlabel('\omega (rad)');
@@ -205,7 +205,7 @@ H21 = BPFbetter(wc, 21, N);
 idx = N/2 + 1; % Define start index for positive frequencies
 
 % Plot magnitude of the frequency response for L = 21
-figure; clf;
+figure(7); clf;
 plot(w(idx:end), abs(H21(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -230,7 +230,7 @@ H81 = BPFbetter(wc, 81, N);
 idx = N/2 + 1; % Define start index for positive frequencies
 
 % Plot magnitude of the frequency response for L = 81
-figure; clf;
+figure(8); clf;
 plot(w(idx:end), abs(H81(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -285,7 +285,7 @@ HOct1 = HammingNorm(wc(1),L(1),N);
 HOctTot = [HOct1;HOct2;HOct3;HOct4;HOct5;HOct6;HOct7];
 whalf = w(length(w)/2:end);
 HOctHalf = HOctTot(:,length(w)/2:end);
-figure
+figure(9)
 plot(whalf,abs(HOctHalf),LineWidth=2)
 hold on
 xline(wc, '--r', strcat('\omega = ' , string(wc)), 'LabelOrientation', 'aligned', 'LabelVerticalAlignment','middle');
@@ -306,7 +306,7 @@ xx(interval2) = cos(2*pi*880*t(interval2));
 xx(interval3) = cos(2*pi*440*t(interval3)) + cos(2*pi*1760*t(interval3));
 
 % Plot the signal
-figure;
+figure(10);
 plot(t, xx);
 title('Generated Signal x(t)');
 xlabel('Time (s)');
@@ -326,7 +326,6 @@ numBands = size(bands, 1);
 filterOutputs = zeros(numBands, length(xx)); % To store filter outputs
 
 % Plot Frequency Responses for All Filters
-figure;
 for i = 1:numBands
     % Calculate center frequency and normalized cutoff
     fc = (bands{i, "StartingFreq_Hz_"} + bands{i, "EndingFreq_Hz_"}) / 2;
@@ -344,15 +343,61 @@ for i = 1:numBands
 end
     
 %% 5.3c)
+figure(11);
 for i = 1:numBands
     subplot(numBands, 1, i);
     plot(t, filterOutputs(i, :));
-    title(['Filter Output for Band ', num2str(bands{i, "StartingFreq_Hz_"}), ...
-        '-', num2str(bands{i, "EndingFreq_Hz_"}), ' Hz']);
+    title(['Filter Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
+        '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
     xlabel('Time (s)');
     ylabel('Amplitude');
     grid on;
 end
+
+%% 5.3d) Validate Output Signals by Comparing Magnitudes and Phases
+% Frequency responses for validation
+filterOutputMaxFreq = zeros(3, numBands);
+regionIndex = [0*fs, 0.25*fs;0.3*fs, 0.55*fs;0.6*fs, 0.85*fs];
+
+for j = 1:3
+    figure(11+j);
+    sgtitle(['Region ', num2str(j)])
+    for i = 1:numBands
+        % Fourier Transform of the filter output
+        Y = fft(filterOutputs(i, :), N);
+        Y = Y(:, 1:529);
+        f = (0:N-1)*(fs/N); % Frequency axis
+        f = f(1:529);
+        
+        % Magnitude and phase plots
+        subplot(numBands, 2, 2*i-1);
+        plot(f, abs(Y)/max(abs(Y)));
+        title(['Magnitude of Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
+            '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
+        xlabel('Frequency (Hz)');
+        xlim([0 4000])
+        ylabel('Magnitude');
+        grid on;
+    
+        subplot(numBands, 2, 2*i);
+        plot(f, angle(Y)/pi);
+        title(['Phase of Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
+            '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
+        xlabel('Frequency (Hz)');
+        xlim([0 4000])
+        ylabel('Phase (\pi radians)');
+        grid on;
+    
+        maxFreqIndex = find(abs(Y)/max(abs(Y)) == 1);
+        maxFreq = f(maxFreqIndex);
+        filterOutputMaxFreq(i) = maxFreq;
+    end
+end
+
+
+% Comment on validation
+disp('Check that the magnitude peaks match the expected frequencies of the input signal.');
+disp('Verify that the phase remains consistent for sinusoids in each filter band.');
 %%  Project Functions
 
 % Simple Band Pass Filter (4.1a)
