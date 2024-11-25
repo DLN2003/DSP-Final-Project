@@ -427,7 +427,7 @@ for regionIdx = 1:3
             '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
         xlabel('Frequency (Hz)');
         xlim([f_band(1) f_band(end)]);
-        ylabel('Phase (\pi radians)');
+        ylabel('Phase (\pi rad)');
         grid on;
 
         % Find the max magnitude for the current band

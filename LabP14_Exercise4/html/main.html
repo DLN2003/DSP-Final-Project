@@ -1,0 +1,1210 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>main</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-11-25"><meta name="DC.source" content="main.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Octave Band Filtering: Lab P-14: 4 Lab Exercises</a></li><li><a href="#2">4.1 Simple Bandpass Filter</a></li><li><a href="#3">4.1a) Generate Bandpass with wc = 0.4*pi and L = 40, plot magnitude and phase response</a></li><li><a href="#4">4.1b) Using the 0.5 level passband, find width of passband</a></li><li><a href="#5">4.1c) Make plots to measure the passband at L = 20 and L = 80 with wc the same; measure their passband widths</a></li><li><a href="#6">4.2) A Better BPF</a></li><li><a href="#7">4.2a) Same as 4.1a) for new filter where wc = 0.25*pi and L = 41. Also, measure response at w = {0, 0.1*pi, 0.25*pi, 0.4*pi, 0.5*pi, 0.75*pi}</a></li><li><a href="#8">4.2b) Find the passband width at a threshold level of 50%. Then plot the graphs for two more BPFs at L = 21 and L = 81 and get their passbands.</a></li><li><a href="#9">4.2c)</a></li><li><a href="#10">4.2d)</a></li><li><a href="#11">5.1</a></li><li><a href="#12">5.2a) See function "HanningNorm(wc, L, N);"</a></li><li><a href="#13">5.2b)</a></li><li><a href="#14">5.2c)</a></li><li><a href="#15">5.3a)</a></li><li><a href="#16">5.3b)</a></li><li><a href="#17">5.3c)</a></li><li><a href="#18">5.3d) Validate Output Signals by Comparing Magnitudes and Phases</a></li><li><a href="#19">5.3e)</a></li><li><a href="#20">Project Functions</a></li></ul></div><h2 id="1">Octave Band Filtering: Lab P-14: 4 Lab Exercises</h2><pre class="codeinput">clear;
+close <span class="string">all</span>;
+</pre><h2 id="2">4.1 Simple Bandpass Filter</h2><p>Use the impulse response of FIR: h(n) = (2/L)*cos(wc*n), 0 &lt;= n &lt; L</p><h2 id="3">4.1a) Generate Bandpass with wc = 0.4*pi and L = 40, plot magnitude and phase response</h2><pre class="codeinput"><span class="comment">% Begin Filter analysis</span>
+clear
+L = 40; <span class="comment">% Length of Filter</span>
+N = 2048; <span class="comment">% # of Points for the DFT</span>
+w = -pi: 2*pi/N: pi - 2*pi/N; <span class="comment">% Define frequency range</span>
+wc = 0.4*pi; <span class="comment">% Cutoff frequency for the filter</span>
+
+<span class="comment">% Frequency response for the bandpass filter</span>
+H = BPFsimp(wc, L, N); <span class="comment">% Obtain frequency response of Bandpass filter</span>
+idx = N/2 + 1; <span class="comment">% Define start index for positive frequencies</span>
+
+<span class="comment">% Plot magnitude of the frequency response</span>
+figure(1); clf;
+plot(w(idx:end), abs(H(idx:end)));
+title(<span class="string">'Magnitude of Frequency Response '</span>);
+xlabel(<span class="string">'\omega (rad)'</span>);
+ylabel(<span class="string">'|H(\omega)|'</span>);
+
+<span class="comment">% Add a vertical line at &#969; = 0.4&#960; ~ 1.257</span>
+xline(1.257, <span class="string">'--r'</span>, <span class="string">'\omega = 0.4\pi'</span>, <span class="string">'LabelOrientation'</span>, <span class="string">'horizontal'</span>, <span class="string">'LabelVerticalAlignment'</span>, <span class="string">'middle'</span>);
+yline(1, <span class="string">'--'</span>)
+
+<span class="comment">% This Plot shows the positive index of our bandpass filter with the main</span>
+<span class="comment">% lobe centered at wc. It's side lobes are reasonably large, meaning that</span>
+<span class="comment">% the threshold level we choose for our passband cannot be too close to 0.</span>
+
+<span class="comment">% Plot phase for frequency response</span>
+figure(2); clf;
+plot(w(idx:end), angle(H(idx:end)));
+title(<span class="string">'Phase of Frequency Response'</span>);
+xlabel(<span class="string">'\omega (rad)'</span>);
+ylabel(<span class="string">'\Theta(\omega)'</span>);
+
+<span class="comment">% This is the Phase of our passband which is linear in the region of each</span>
+<span class="comment">% lobe, though the line centered at the cutoff frequency is larger &amp;</span>
+<span class="comment">% actually representative of our phase. This is expected for an FIR filter.</span>
+</pre><img vspace="5" hspace="5" src="main_01.png" alt=""> <img vspace="5" hspace="5" src="main_02.png" alt=""> <h2 id="4">4.1b) Using the 0.5 level passband, find width of passband</h2><pre class="codeinput"><span class="comment">% Use Project function to define the pass band width</span>
+Passband = PBWidth(H(idx:end),w(idx:end),0.5);
+
+<span class="comment">% Display passband width</span>
+fprintf(<span class="string">'Passband width @ the 0.5 level is approximately %.4f radians for the L = 40 filter\n'</span>, Passband);
+
+<span class="comment">% We can imagine this width drawn on our first plot, in 4.1a), between the sides of</span>
+<span class="comment">% the main lobe that is centered at wc. It can give us a range of</span>
+<span class="comment">% frequencies accepted by our passband using the cutoff frequency where</span>
+<span class="comment">% Range of accepted w = wc +- PassBand_Width/2</span>
+</pre><pre class="codeoutput">Passband width @ the 0.5 level is approximately 0.1871 radians for the L = 40 filter
+</pre><h2 id="5">4.1c) Make plots to measure the passband at L = 20 and L = 80 with wc the same; measure their passband widths</h2><pre class="codeinput"><span class="comment">% BPF for L = 20 using project function</span>
+H20 = BPFsimp(wc, 20, N);
+
+<span class="comment">% Plot magnitude of the frequency response for L = 20 BPF</span>
+figure(3); clf;
+plot(w(idx:end), abs(H20(idx:end)));
+title(<span class="string">'Magnitude of Frequency Response '</span>);
+xlabel(<span class="string">'\omega (rad)'</span>);
+ylabel(<span class="string">'|H(\omega)|'</span>);
+
+<span class="comment">% Add a vertical line at &#969; = 0.4&#960; ~ 1.257</span>
+xline(1.257, <span class="string">'--r'</span>, <span class="string">'\omega = 0.4\pi'</span>, <span class="string">'LabelOrientation'</span>, <span class="string">'horizontal'</span>, <span class="string">'LabelVerticalAlignment'</span>, <span class="string">'middle'</span>);
+yline(1, <span class="string">'--'</span>)
+
+<span class="comment">% Use Project function to define the pass band width</span>
+Passband = PBWidth(H20(idx:end),w(idx:end),0.5);
+
+<span class="comment">% Display passband width for L = 20 BPF</span>
+fprintf(<span class="string">'Passband width @ the 0.5 level is approximately %.4f radians for the L = 20 filter\n'</span>, Passband);
+
+
+
+<span class="comment">% BPF for L = 80 using project function</span>
+H80 = BPFsimp(wc, 80, N);
+
+<span class="comment">% Plot magnitude of the frequency response for L = 80 BPF</span>
+figure(4); clf;
+plot(w(idx:end), abs(H80(idx:end)));
+title(<span class="string">'Magnitude of Frequency Response '</span>);
+xlabel(<span class="string">'\omega (rad)'</span>);
+ylabel(<span class="string">'|H(\omega)|'</span>);
+
+<span class="comment">% Add a vertical line at &#969; = 0.4&#960; ~ 1.257</span>
+xline(1.257, <span class="string">'--r'</span>, <span class="string">'\omega = 0.4\pi'</span>, <span class="string">'LabelOrientation'</span>, <span class="string">'horizontal'</span>, <span class="string">'LabelVerticalAlignment'</span>, <span class="string">'middle'</span>);
+yline(1, <span class="string">'--'</span>)
+
+<span class="comment">% Use Project function to define the pass band width</span>
+Passband = PBWidth(H80(idx:end),w(idx:end),0.5);
+
+<span class="comment">% Display passband width for L = 80 BPF</span>
+fprintf(<span class="string">'Passband width @ the 0.5 level is approximately %.4f radians for the L = 80 filter\n'</span>, Passband);
+
+<span class="comment">% It is obvious from the figures that as L increases, the width of the pass</span>
+<span class="comment">% band narrows. At half the original length, the passband is twice as wide;</span>
+<span class="comment">% at twice the original length, the passband is half as wide.</span>
+</pre><pre class="codeoutput">Passband width @ the 0.5 level is approximately 0.3774 radians for the L = 20 filter
+Passband width @ the 0.5 level is approximately 0.0920 radians for the L = 80 filter
+</pre><img vspace="5" hspace="5" src="main_03.png" alt=""> <img vspace="5" hspace="5" src="main_04.png" alt=""> <h2 id="6">4.2) A Better BPF</h2><p>Use a Hamming window to adjust the BPF where now:  h(n) = (0.54-0.46*cos(2*pi*n/(L-1)))cos(wc(n-(L-1)/2)), n = 1,2,3,...,L-1</p><h2 id="7">4.2a) Same as 4.1a) for new filter where wc = 0.25*pi and L = 41. Also, measure response at w = {0, 0.1*pi, 0.25*pi, 0.4*pi, 0.5*pi, 0.75*pi}</h2><pre class="codeinput">clear
+
+<span class="comment">% Begin Filter analysis</span>
+L = 41; <span class="comment">% Length of Filter</span>
+N = 2048; <span class="comment">% # of Points for the DFT</span>
+w = -pi: 2*pi/N: pi - 2*pi/N; <span class="comment">% Define frequency range</span>
+wc = 0.25*pi; <span class="comment">% Cutoff frequency for the filter</span>
+
+<span class="comment">% Use Project function to define better bandpass filter</span>
+H = BPFbetter(wc, L, N);
+idx = N/2 + 1; <span class="comment">% Define start index for positive frequencies</span>
+
+<span class="comment">% Plot magnitude of the frequency response</span>
+figure(5); clf;
+plot(w(idx:end), abs(H(idx:end)));
+title(<span class="string">'Magnitude of Frequency Response '</span>);
+xlabel(<span class="string">'\omega (rad)'</span>);
+ylabel(<span class="string">'|H(\omega)|'</span>);
+
+<span class="comment">% Add a vertical line at &#969; = 0.25&#960; ~ 0.7854</span>
+xline(0.7854, <span class="string">'--r'</span>, <span class="string">'\omega = 0.4\pi'</span>, <span class="string">'LabelOrientation'</span>, <span class="string">'horizontal'</span>, <span class="string">'LabelVerticalAlignment'</span>, <span class="string">'middle'</span>);
+
+<span class="comment">% This Plot shows the positive index of our bandpass better filter with the main</span>
+<span class="comment">% lobe centered at wc = 0.25*pi. We see very low side lobes coming off of our main</span>
+<span class="comment">% lobe. This suggests our passband threshold can be much closer to 0</span>
+
+<span class="comment">% Plot phase for frequency response</span>
+figure(6); clf;
+plot(w(idx:end), angle(H(idx:end)));
+title(<span class="string">'Phase of Frequency Response'</span>);
+xlabel(<span class="string">'\omega (rad)'</span>);
+ylabel(<span class="string">'\Theta(\omega)'</span>);
+
+<span class="comment">% This is the Phase of our passband which is linear in the region of each</span>
+<span class="comment">% of the main lobe, but is not consistently linear in the regions of the</span>
+<span class="comment">% side lobes. For our FIR filter this is as expected for a non normalized signal.</span>
+
+
+
+<span class="comment">% Use find function to calculate frequency response at the desired frequencies</span>
+
+<span class="comment">% Define intermediate function for response at positive frequencies for</span>
+<span class="comment">% indexing purposes</span>
+G = H(idx:end);
+
+<span class="comment">% Define values of omega</span>
+selected_w = [0, 0.1*pi, 0.25*pi, 0.4*pi, 0.5*pi, 0.75*pi];
+
+<span class="comment">% Initialize an array to store the magnitudes at selected frequencies</span>
+H_for_selected_w = zeros(1, length(selected_w));
+
+
+<span class="comment">% Initalize an array of values for the target indicies to find H</span>
+target_idx = zeros(1, length(selected_w));
+
+<span class="comment">% Calculate H by finding the correct index in the range of frequencies</span>
+<span class="keyword">for</span> i = 1:length(selected_w)
+    <span class="comment">% Find all the indices in w(idx:end) closest to the desired frequency</span>
+    target_idx = find(abs(w(idx:end) - selected_w(i)) &lt;= 1e-2);
+
+    <span class="comment">% Getting the H vlaues using our intermediate function G evaluated at</span>
+    <span class="comment">% the fourth of the 6 indices found</span>
+    H_for_selected_w(i) = abs(G(target_idx(4)));
+<span class="keyword">end</span>
+
+<span class="comment">% Display the magnitudes for the selected frequencies</span>
+fprintf(<span class="string">'|H(\x03c9)| for selected values of \x03c9:\n'</span>);
+<span class="keyword">for</span> i = 1:length(selected_w)
+    fprintf(<span class="string">'  %.2f\x03c0: %.4f\n'</span>, selected_w(i)/pi, H_for_selected_w(i));
+<span class="keyword">end</span>
+
+<span class="comment">% This list of Responses makes sense, you can just look at the graph. Most</span>
+<span class="comment">% of the values of w are close to zero, but the value at wc = 0.25*pi is</span>
+<span class="comment">% much higher (at 10.88) since that is the center of the passband and all the other</span>
+<span class="comment">% selected frequencies fall outside the passband.</span>
+</pre><pre class="codeoutput">|H(&#969;)| for selected values of &#969;:
+  0.00&#960;: 0.0785
+  0.10&#960;: 0.0804
+  0.25&#960;: 10.8800
+  0.40&#960;: 0.0817
+  0.50&#960;: 0.0800
+  0.75&#960;: 0.0800
+</pre><img vspace="5" hspace="5" src="main_05.png" alt=""> <img vspace="5" hspace="5" src="main_06.png" alt=""> <h2 id="8">4.2b) Find the passband width at a threshold level of 50%. Then plot the graphs for two more BPFs at L = 21 and L = 81 and get their passbands.</h2><pre class="codeinput"><span class="comment">% 50% of the maximum 10.88 is 5.44, so this defines our threshold.</span>
+
+<span class="comment">% This threshold can be calculated by</span>
+th = max(abs(G)) * 0.5;
+
+<span class="comment">% We can use the same function defined in part 4.1(b)</span>
+Passband = PBWidth(G,w(idx:end),th);
+
+<span class="comment">% Display passband width for L = 41</span>
+fprintf(<span class="string">'Passband width @ the 50%% level is approximately %.4f radians for the L = 41 filter\n'</span>, Passband);
+
+
+
+<span class="comment">% We now define the BPF for L = 21</span>
+H21 = BPFbetter(wc, 21, N);
+idx = N/2 + 1; <span class="comment">% Define start index for positive frequencies</span>
+
+<span class="comment">% Plot magnitude of the frequency response for L = 21</span>
+figure(7); clf;
+plot(w(idx:end), abs(H21(idx:end)));
+title(<span class="string">'Magnitude of Frequency Response '</span>);
+xlabel(<span class="string">'\omega (rad)'</span>);
+ylabel(<span class="string">'|H(\omega)|'</span>);
+
+<span class="comment">% Add a vertical line at &#969; = 0.25&#960; ~ 0.7854</span>
+xline(0.7854, <span class="string">'--r'</span>, <span class="string">'\omega = 0.4\pi'</span>, <span class="string">'LabelOrientation'</span>, <span class="string">'horizontal'</span>, <span class="string">'LabelVerticalAlignment'</span>, <span class="string">'middle'</span>);
+
+<span class="comment">% Set a threshold based on the peak value for H21</span>
+th21 = max(abs(H21(idx:end))) * 0.5;
+
+<span class="comment">% Use PBWidth with the updated threshold</span>
+Passband21 = PBWidth(H21(idx:end), w(idx:end), th21);
+
+<span class="comment">% Display passband width for L = 21</span>
+fprintf(<span class="string">'Passband width @ the 50%% level is approximately %.4f radians for the L = 21 filter\n'</span>, Passband21);
+
+
+
+<span class="comment">% And now for the analysis of the L = 81 BPF</span>
+H81 = BPFbetter(wc, 81, N);
+idx = N/2 + 1; <span class="comment">% Define start index for positive frequencies</span>
+
+<span class="comment">% Plot magnitude of the frequency response for L = 81</span>
+figure(8); clf;
+plot(w(idx:end), abs(H81(idx:end)));
+title(<span class="string">'Magnitude of Frequency Response '</span>);
+xlabel(<span class="string">'\omega (rad)'</span>);
+ylabel(<span class="string">'|H(\omega)|'</span>);
+
+<span class="comment">% Add a vertical line at &#969; = 0.25&#960; ~ 0.7854</span>
+xline(0.7854, <span class="string">'--r'</span>, <span class="string">'\omega = 0.4\pi'</span>, <span class="string">'LabelOrientation'</span>, <span class="string">'horizontal'</span>, <span class="string">'LabelVerticalAlignment'</span>, <span class="string">'middle'</span>);
+
+<span class="comment">% Set a threshold based on the peak value for H81</span>
+th81 = max(abs(H81(idx:end))) * 0.5;
+
+<span class="comment">% Use PBWidth with the updated threshold</span>
+Passband81 = PBWidth(H81(idx:end), w(idx:end), th81);
+
+<span class="comment">% Display passband width for L = 81</span>
+fprintf(<span class="string">'Passband width @ the 50%% level is approximately %.4f radians for the L = 81 filter\n'</span>, Passband81);
+
+<span class="comment">% The relationship is similar to that found in part 7.1 (c) in terms of the</span>
+<span class="comment">% passband width. However, this filter is not normalized, so the magnitude</span>
+<span class="comment">% of the frequency response changes depending on the value of L that you</span>
+<span class="comment">% chose. Lower values of L will mean that the passband has less gain, and</span>
+<span class="comment">% a higher value of L will correlate to more gain.</span>
+</pre><pre class="codeoutput">Passband width @ the 50% level is approximately 0.2761 radians for the L = 41 filter
+Passband width @ the 50% level is approximately 0.5676 radians for the L = 21 filter
+Passband width @ the 50% level is approximately 0.1411 radians for the L = 81 filter
+</pre><img vspace="5" hspace="5" src="main_07.png" alt=""> <img vspace="5" hspace="5" src="main_08.png" alt=""> <h2 id="9">4.2c)</h2><h2 id="10">4.2d)</h2><h2 id="11">5.1</h2><pre class="codeinput">BP_Filters = readtable(<span class="string">"Bandpass_Filters.xlsx"</span>); <span class="comment">% Load Bandpass filters from file</span>
+BP_Filters(8:11,:) = []; <span class="comment">% Removes unnecessary rows</span>
+</pre><pre class="codeoutput">Warning: Column headers from the file were modified to make them valid MATLAB
+identifiers before creating variable names for the table. The original column
+headers are saved in the VariableDescriptions property.
+Set 'VariableNamingRule' to 'preserve' to use the original column headers as
+table variable names. 
+</pre><h2 id="12">5.2a) See function "HanningNorm(wc, L, N);"</h2><h2 id="13">5.2b)</h2><pre class="codeinput">wc = BP_Filters.CenterFreq_omegaC_;
+N = 2048; <span class="comment">% # of Points for the DFT</span>
+w = -pi: 2*pi/N: pi - 2*pi/N;<span class="comment">%Frequency range</span>
+<span class="comment">% Filters for octaves 1-7. L was determined through trial and error and was</span>
+<span class="comment">% chosen based on which L generated a bandwidth closest to the design</span>
+<span class="comment">% bandwidth for each octave.</span>
+<span class="comment">% L = [519, 251, 128,63,32,17,9];% Values originally found for 0.5 stopband</span>
+L = [943, 546, 246,133, 67, 34, 17]; <span class="comment">% Values with a 0.01 stopband</span>
+</pre><h2 id="14">5.2c)</h2><pre class="codeinput">HOct7 = HammingNorm(wc(7),L(7),N);
+HOct6 = HammingNorm(wc(6),L(6),N);
+HOct5 = HammingNorm(wc(5),L(5),N);
+HOct4 = HammingNorm(wc(4),L(4),N);
+HOct3 = HammingNorm(wc(3),L(3),N);
+HOct2 = HammingNorm(wc(2),L(2),N);
+HOct1 = HammingNorm(wc(1),L(1),N);
+HOctTot = [HOct1;HOct2;HOct3;HOct4;HOct5;HOct6;HOct7];
+whalf = w(length(w)/2:end);
+HOctHalf = HOctTot(:,length(w)/2:end);
+figure(9)
+plot(whalf,abs(HOctHalf),LineWidth=2)
+hold <span class="string">on</span>
+xline(wc, <span class="string">'--r'</span>, strcat(<span class="string">'\omega = '</span> , string(wc)), <span class="string">'LabelOrientation'</span>, <span class="string">'aligned'</span>, <span class="string">'LabelVerticalAlignment'</span>,<span class="string">'middle'</span>);
+</pre><img vspace="5" hspace="5" src="main_09.png" alt=""> <h2 id="15">5.3a)</h2><pre class="codeinput">fs = 8000;              <span class="comment">% Sampling frequency</span>
+t = 0:1/fs:0.85;        <span class="comment">% Time vector from 0 to 0.85 seconds with 1/fs step</span>
+xx = zeros(size(t));    <span class="comment">% Initialize signal vector</span>
+
+<span class="comment">% Define the three time intervals</span>
+interval1 = (t &gt;= 0) &amp; (t &lt; 0.25);
+interval2 = (t &gt;= 0.3) &amp; (t &lt; 0.55);
+interval3 = (t &gt;= 0.6) &amp; (t &lt; 0.85);
+
+<span class="comment">% Add sinusoids in each time interval</span>
+xx(interval1) = cos(2*pi*220*t(interval1));
+xx(interval2) = cos(2*pi*880*t(interval2));
+xx(interval3) = cos(2*pi*440*t(interval3)) + cos(2*pi*1760*t(interval3));
+
+<span class="comment">% Plot the signal</span>
+figure(10);
+plot(t, xx);
+title(<span class="string">'Generated Signal x(t)'</span>);
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Amplitude'</span>);
+grid <span class="string">on</span>;
+</pre><img vspace="5" hspace="5" src="main_10.png" alt=""> <h2 id="16">5.3b)</h2><p>Frequency bands for 5 BPF</p><pre class="codeinput">bands = [BP_Filters(2, <span class="string">"StartingFreq_Hz_"</span>), BP_Filters(2, <span class="string">"EndingFreq_Hz_"</span>);
+        BP_Filters(3, <span class="string">"StartingFreq_Hz_"</span>), BP_Filters(3, <span class="string">"EndingFreq_Hz_"</span>);
+        BP_Filters(4, <span class="string">"StartingFreq_Hz_"</span>), BP_Filters(4, <span class="string">"EndingFreq_Hz_"</span>);
+        BP_Filters(5, <span class="string">"StartingFreq_Hz_"</span>), BP_Filters(5, <span class="string">"EndingFreq_Hz_"</span>);
+        BP_Filters(6, <span class="string">"StartingFreq_Hz_"</span>), BP_Filters(6, <span class="string">"EndingFreq_Hz_"</span>);];
+L = 101;                 <span class="comment">% Filter length</span>
+N = 1024;                <span class="comment">% FFT size for frequency response</span>
+numBands = size(bands, 1);
+filterOutputs = zeros(numBands, length(xx)); <span class="comment">% To store filter outputs</span>
+
+<span class="keyword">for</span> i = 1:numBands
+    <span class="comment">% Calculate center frequency and normalized cutoff</span>
+    fc = (bands{i, <span class="string">"StartingFreq_Hz_"</span>} + bands{i, <span class="string">"EndingFreq_Hz_"</span>}) / 2;
+    wc = 2 * pi * fc / fs; <span class="comment">% Convert to normalized frequency</span>
+
+    <span class="comment">% Call HammingNorm to generate frequency response</span>
+    H = HammingNorm(wc, L, N); <span class="comment">% Obtain frequency response</span>
+
+    <span class="comment">% Apply the filter (IFFT to create time-domain filter coefficients)</span>
+    h = ifft(ifftshift(H), <span class="string">'symmetric'</span>);
+    h = h(1:L); <span class="comment">% Trim to filter length</span>
+
+    <span class="comment">% Filter the signal</span>
+    filterOutputs(i, :) = filter(h, 1, xx);
+<span class="keyword">end</span>
+</pre><h2 id="17">5.3c)</h2><p>Plot Frequency Responses for All Filters</p><pre class="codeinput">figure(11);
+<span class="keyword">for</span> i = 1:numBands
+    subplot(numBands, 1, i);
+    plot(t, filterOutputs(i, :));
+    title([<span class="string">'Filter Output for Band '</span>, num2str(round(bands{i, <span class="string">"StartingFreq_Hz_"</span>})), <span class="keyword">...</span>
+        <span class="string">'-'</span>, num2str(round(bands{i, <span class="string">"EndingFreq_Hz_"</span>})), <span class="string">' Hz'</span>]);
+    xlabel(<span class="string">'Time (s)'</span>);
+    ylabel(<span class="string">'Amplitude'</span>);
+    grid <span class="string">on</span>;
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="main_11.png" alt=""> <h2 id="18">5.3d) Validate Output Signals by Comparing Magnitudes and Phases</h2><p>Frequency responses for validation</p><pre class="codeinput">filterOutputMaxFreq = zeros(3, numBands);
+regionIndex = [1, 0.25*fs; 0.3*fs, 0.55*fs; 0.6*fs, 0.85*fs];
+regions = {xx(1:0.25*fs), xx(0.3*fs:0.55*fs), xx(0.6*fs:0.85*fs)}; <span class="comment">% Cell array to store regions</span>
+regionOctave = zeros(3, 1); <span class="comment">% To store octave results for each region</span>
+
+<span class="comment">%For the input signal xx, based on the given definition:</span>
+
+<span class="comment">%xx1 is a sinusoid at 220 Hz &#8594; Expected Octave = 3.</span>
+<span class="comment">%xx2 is a sinusoid at 880 Hz &#8594; Expected Octave = 5.</span>
+<span class="comment">%xx3 contains 440 Hz and 1760 Hz &#8594; Expected Octaves = 4.</span>
+
+<span class="comment">% Validation of Regions</span>
+expectedOctaves = [3, 5, 4]; <span class="comment">% Expected octaves for xx1, xx2, xx3</span>
+
+<span class="comment">% Define frequency axis limits</span>
+f = (0:N-1) * (fs / N);
+maxFreqIndex = find(f &lt;= BP_Filters{6, <span class="string">"EndingFreq_Hz_"</span>});
+maxFreqIndex = maxFreqIndex(end);
+minFreqIndex = find(f &gt;= BP_Filters{1, <span class="string">"StartingFreq_Hz_"</span>});
+minFreqIndex = minFreqIndex(1);
+
+<span class="keyword">for</span> regionIdx = 1:3
+    currentRegion = regions{regionIdx}; <span class="comment">% Select the current region (xx1, xx2, xx3)</span>
+
+    <span class="comment">% Initialize storage for filter outputs in the current region</span>
+    filterOutputs = zeros(numBands, length(currentRegion));
+    maxMagnitudes = zeros(1, numBands); <span class="comment">% To store the max magnitude for each filter band</span>
+
+    <span class="comment">% Filter each region</span>
+    <span class="keyword">for</span> i = 1:numBands
+        <span class="comment">% Calculate center frequency and normalized cutoff</span>
+        fc = (bands{i, <span class="string">"StartingFreq_Hz_"</span>} + bands{i, <span class="string">"EndingFreq_Hz_"</span>}) / 2;
+        wc = 2 * pi * fc / fs; <span class="comment">% Convert to normalized frequency</span>
+
+        <span class="comment">% Call HammingNorm to generate frequency response</span>
+        H = HammingNorm(wc, L, N); <span class="comment">% Obtain frequency response</span>
+
+        <span class="comment">% Apply the filter (IFFT to create time-domain filter coefficients)</span>
+        h = ifft(ifftshift(H), <span class="string">'symmetric'</span>);
+        h = h(1:L); <span class="comment">% Trim to filter length</span>
+
+        <span class="comment">% Filter the current region signal</span>
+        filterOutputs(i, :) = filter(h, 1, currentRegion);
+    <span class="keyword">end</span>
+
+    <span class="comment">% Compute and store the max frequencies for validation</span>
+    figure(regionIdx + 11); <span class="comment">% Start figure numbering from 12</span>
+    sgtitle([<span class="string">'Region '</span>, num2str(regionIdx)]);
+
+    <span class="keyword">for</span> i = 1:numBands
+        <span class="comment">% Fourier Transform of the filter output</span>
+        Y = fft(filterOutputs(i, :), N);
+        Y = Y(minFreqIndex:maxFreqIndex);
+        f_band = f(minFreqIndex:maxFreqIndex);
+
+        <span class="comment">% Magnitude and phase plots</span>
+        subplot(numBands, 2, 2*i-1);
+        plot(f_band, abs(Y));
+        title([<span class="string">'Magnitude of Output for Band '</span>, num2str(round(bands{i, <span class="string">"StartingFreq_Hz_"</span>})), <span class="keyword">...</span>
+            <span class="string">'-'</span>, num2str(round(bands{i, <span class="string">"EndingFreq_Hz_"</span>})), <span class="string">' Hz'</span>]);
+        xlabel(<span class="string">'Frequency (Hz)'</span>);
+        xlim([f_band(1) f_band(end)]);
+        ylabel(<span class="string">'Magnitude'</span>);
+        grid <span class="string">on</span>;
+
+        subplot(numBands, 2, 2*i);
+        plot(f_band, angle(Y) / pi);
+        title([<span class="string">'Phase of Output for Band '</span>, num2str(round(bands{i, <span class="string">"StartingFreq_Hz_"</span>})), <span class="keyword">...</span>
+            <span class="string">'-'</span>, num2str(round(bands{i, <span class="string">"EndingFreq_Hz_"</span>})), <span class="string">' Hz'</span>]);
+        xlabel(<span class="string">'Frequency (Hz)'</span>);
+        xlim([f_band(1) f_band(end)]);
+        ylabel(<span class="string">'Phase (\pi radians)'</span>);
+        grid <span class="string">on</span>;
+
+        <span class="comment">% Find the max magnitude for the current band</span>
+        maxMagnitudes(i) = max(abs(Y));
+    <span class="keyword">end</span>
+
+    <span class="comment">% Determine the octave for the region based on the band with the highest peak</span>
+    [~, maxBandIdx] = max(maxMagnitudes); <span class="comment">% Index of the band with the highest peak</span>
+    regionOctave(regionIdx) = maxBandIdx + 1; <span class="comment">% Octave is band index + 1</span>
+
+    <span class="comment">% Display the result</span>
+    disp([<span class="string">'Region '</span>, num2str(regionIdx), <span class="string">' belongs to Octave '</span>, num2str(regionOctave(regionIdx))]);
+<span class="keyword">end</span>
+
+validationPassed = true; <span class="comment">% Flag to track validation status</span>
+
+<span class="keyword">for</span> regionIdx = 1:3
+    fprintf(<span class="string">'Validating Region %d...\n'</span>, regionIdx);
+    fprintf(<span class="string">'Computed Octave: %d | Expected Octave: %d\n'</span>, regionOctave(regionIdx), expectedOctaves(regionIdx));
+
+    <span class="keyword">if</span> regionOctave(regionIdx) == expectedOctaves(regionIdx)
+        fprintf(<span class="string">'Region %d: Validation Passed.\n'</span>, regionIdx);
+    <span class="keyword">else</span>
+        fprintf(<span class="string">'Region %d: Validation Failed!\n'</span>, regionIdx);
+        validationPassed = false;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> validationPassed
+    disp(<span class="string">'All regions passed validation!'</span>);
+<span class="keyword">else</span>
+    disp(<span class="string">'Some regions failed validation. Check the filtering and analysis.'</span>);
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Region 1 belongs to Octave 3
+Region 2 belongs to Octave 5
+Region 3 belongs to Octave 4
+Validating Region 1...
+Computed Octave: 3 | Expected Octave: 3
+Region 1: Validation Passed.
+Validating Region 2...
+Computed Octave: 5 | Expected Octave: 5
+Region 2: Validation Passed.
+Validating Region 3...
+Computed Octave: 4 | Expected Octave: 4
+Region 3: Validation Passed.
+All regions passed validation!
+</pre><img vspace="5" hspace="5" src="main_12.png" alt=""> <img vspace="5" hspace="5" src="main_13.png" alt=""> <img vspace="5" hspace="5" src="main_14.png" alt=""> <h2 id="19">5.3e)</h2><p>Define filter length and sampling frequency</p><pre class="codeinput">L = length(h); <span class="comment">% Filter length</span>
+transientDuration = L / fs; <span class="comment">% Transient duration in seconds</span>
+
+fprintf(<span class="string">'Transient Duration: %.4f seconds\n'</span>, transientDuration);
+
+<span class="comment">% Analyze transient effects for each filter in each region</span>
+<span class="keyword">for</span> regionIdx = 1:3
+    currentRegion = regions{regionIdx}; <span class="comment">% Select the current region</span>
+    filterOutputs = zeros(numBands, length(currentRegion));
+
+    <span class="comment">% Apply each filter to the current region</span>
+    <span class="keyword">for</span> i = 1:numBands
+        <span class="comment">% Calculate center frequency and normalized cutoff</span>
+        fc = (bands{i, <span class="string">"StartingFreq_Hz_"</span>} + bands{i, <span class="string">"EndingFreq_Hz_"</span>}) / 2;
+        wc = 2 * pi * fc / fs; <span class="comment">% Convert to normalized frequency</span>
+
+        <span class="comment">% Call HammingNorm to generate frequency response</span>
+        H = HammingNorm(wc, L, N); <span class="comment">% Obtain frequency response</span>
+        h = ifft(ifftshift(H), <span class="string">'symmetric'</span>); <span class="comment">% Filter coefficients</span>
+        h = h(1:L); <span class="comment">% Trim to filter length</span>
+
+        <span class="comment">% Filter the signal</span>
+        filterOutputs(i, :) = filter(h, 1, currentRegion);
+
+        <span class="comment">% Plot transient effects</span>
+        figure(regionIdx + 20); <span class="comment">% Separate figure for each region</span>
+        subplot(numBands, 1, i);
+        plot((0:length(currentRegion)-1) / fs, filterOutputs(i, :));
+        hold <span class="string">on</span>;
+        xline(transientDuration, <span class="string">'r--'</span>, <span class="string">'LineWidth'</span>, 1.5); <span class="comment">% Mark transient duration</span>
+        title([<span class="string">'Filter Output for Band '</span>, num2str(round(bands{i, <span class="string">"StartingFreq_Hz_"</span>})), <span class="keyword">...</span>
+            <span class="string">'-'</span>, num2str(round(bands{i, <span class="string">"EndingFreq_Hz_"</span>})), <span class="string">' Hz'</span>]);
+        xlabel(<span class="string">'Time (s)'</span>);
+        xlim([0 0.1])
+        ylabel(<span class="string">'Amplitude'</span>);
+        sgtitle([<span class="string">'First 0.1 Secconds of Region '</span>, num2str(regionIdx)]);
+        grid <span class="string">on</span>;
+        hold <span class="string">off</span>;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% The transient duration lasts roughly 12.6 ms which can be seen in the</span>
+<span class="comment">% plots indicated by the red vertical line. The duration is the same for</span>
+<span class="comment">% each filter in the bank.</span>
+</pre><pre class="codeoutput">Transient Duration: 0.0126 seconds
+</pre><img vspace="5" hspace="5" src="main_15.png" alt=""> <img vspace="5" hspace="5" src="main_16.png" alt=""> <img vspace="5" hspace="5" src="main_17.png" alt=""> <h2 id="20">Project Functions</h2><pre class="codeinput"><span class="comment">% Simple Band Pass Filter (4.1a)</span>
+
+<span class="comment">% Function for bandpass filter frequency response</span>
+<span class="keyword">function</span> H = BPFsimp(wc, L, N)
+    h = zeros(1, L); <span class="comment">% Initialize impulse response</span>
+    <span class="comment">% For loop defining impulse Response for BPF</span>
+    <span class="keyword">for</span> n = 0:L-1
+        h(n+1) = (2 / L) * cos(wc * n);
+    <span class="keyword">end</span>
+    <span class="comment">% Frequency response for the bandpass filter</span>
+H = fftshift(fft(h,N)); <span class="comment">% Take N-point DFT of Bandpass filter and shift 0 frequency to center</span>
+
+<span class="keyword">end</span>
+
+
+<span class="comment">% Width of pass band (4.1b)</span>
+
+<span class="comment">% Function that finds passband width using the magnitude response, omega,</span>
+<span class="comment">% and the threshold level for the passband.</span>
+
+<span class="keyword">function</span> Passband = PBWidth(H,w,th)
+
+<span class="comment">% Find frequencies where |H(w)| is above threshold</span>
+Hmag = abs(H); <span class="comment">% Defintion of magnitude response</span>
+H1 = find(Hmag &gt;= th, 1, <span class="string">'first'</span>); <span class="comment">% Find first index where |H(w)| is close to threshold</span>
+H2 = find(Hmag &gt;= th, 1, <span class="string">'last'</span>); <span class="comment">% Find last index where |H(w)| is close to threshold</span>
+
+<span class="comment">% Convert indices to frequency values</span>
+w1 = w(H1); <span class="comment">% Frequency at start of passband</span>
+w2 = w(H2); <span class="comment">% Frequency at end of passband</span>
+Passband = w2 - w1; <span class="comment">% Width of the passband</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Better Bandpass filter</span>
+
+<span class="comment">% Function for bandpass filter frequency response</span>
+<span class="keyword">function</span> H = BPFbetter(wc, L, N)
+    h = zeros(1, L); <span class="comment">% Initialize impulse response</span>
+
+    <span class="comment">% For loop defining impulse Response for BPF with Hamming window</span>
+    <span class="keyword">for</span> n = 0:L-1
+        h(n+1) = (0.54 - 0.46 * cos(2 * pi * n / (L - 1))) * cos(wc * (n - (L - 1) / 2));
+    <span class="keyword">end</span>
+
+    <span class="comment">% Frequency response for the bandpass filter</span>
+H = fftshift(fft(h,N)); <span class="comment">% Take N-point DFT of Bandpass filter and shift 0 frequency to center</span>
+
+<span class="keyword">end</span>
+
+<span class="comment">% Normalized Hanning Bandpass Filter (5.2)</span>
+
+<span class="comment">% Same as function "BPFbetter" but with a scaling term "B" so that the</span>
+<span class="comment">% maximum value at the center frequency is equal to one.</span>
+<span class="keyword">function</span> H = HammingNorm(wc, L, N)
+    h = zeros(1, L); <span class="comment">% Initialize impulse response</span>
+
+    <span class="comment">% For loop defining impulse Response for BPF with Hamming window</span>
+    <span class="keyword">for</span> n = 0:L-1
+        h(n+1) = (0.54 - 0.46 * cos(2 * pi * n / (L - 1))) * cos(wc * (n - (L - 1) / 2));
+    <span class="keyword">end</span>
+    <span class="comment">% Frequency response for the bandpass filter</span>
+H1 = fftshift(fft(h,N)); <span class="comment">% Take N-point DFT of Bandpass filter and shift 0 frequency to center</span>
+B = 1/max(abs(H1));<span class="comment">% Scaling factor so that max(abs(H)) = 1.</span>
+H = B*H1;
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Octave Band Filtering: Lab P-14: 4 Lab Exercises
+clear;
+close all;
+%% 4.1 Simple Bandpass Filter 
+% Use the impulse response of FIR: h(n) = (2/L)*cos(wc*n), 0 <= n < L
+%% 4.1a) Generate Bandpass with wc = 0.4*pi and L = 40, plot magnitude and phase response
+
+
+% Begin Filter analysis
+clear
+L = 40; % Length of Filter
+N = 2048; % # of Points for the DFT
+w = -pi: 2*pi/N: pi - 2*pi/N; % Define frequency range 
+wc = 0.4*pi; % Cutoff frequency for the filter
+
+% Frequency response for the bandpass filter
+H = BPFsimp(wc, L, N); % Obtain frequency response of Bandpass filter
+idx = N/2 + 1; % Define start index for positive frequencies
+
+% Plot magnitude of the frequency response
+figure(1); clf;
+plot(w(idx:end), abs(H(idx:end)));
+title('Magnitude of Frequency Response ');
+xlabel('\omega (rad)');
+ylabel('|H(\omega)|');
+
+% Add a vertical line at ω = 0.4π ~ 1.257
+xline(1.257, 'REPLACE_WITH_DASH_DASHr', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
+yline(1, 'REPLACE_WITH_DASH_DASH')
+
+% This Plot shows the positive index of our bandpass filter with the main
+% lobe centered at wc. It's side lobes are reasonably large, meaning that
+% the threshold level we choose for our passband cannot be too close to 0.
+
+% Plot phase for frequency response 
+figure(2); clf;
+plot(w(idx:end), angle(H(idx:end)));
+title('Phase of Frequency Response');
+xlabel('\omega (rad)');
+ylabel('\Theta(\omega)');
+
+% This is the Phase of our passband which is linear in the region of each
+% lobe, though the line centered at the cutoff frequency is larger &
+% actually representative of our phase. This is expected for an FIR filter.
+
+%% 4.1b) Using the 0.5 level passband, find width of passband 
+
+% Use Project function to define the pass band width
+Passband = PBWidth(H(idx:end),w(idx:end),0.5);
+
+% Display passband width
+fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L = 40 filter\n', Passband);
+
+% We can imagine this width drawn on our first plot, in 4.1a), between the sides of
+% the main lobe that is centered at wc. It can give us a range of
+% frequencies accepted by our passband using the cutoff frequency where
+% Range of accepted w = wc +- PassBand_Width/2 
+
+%% 4.1c) Make plots to measure the passband at L = 20 and L = 80 with wc the same; measure their passband widths
+
+% BPF for L = 20 using project function 
+H20 = BPFsimp(wc, 20, N);
+
+% Plot magnitude of the frequency response for L = 20 BPF
+figure(3); clf;
+plot(w(idx:end), abs(H20(idx:end)));
+title('Magnitude of Frequency Response ');
+xlabel('\omega (rad)');
+ylabel('|H(\omega)|');
+
+% Add a vertical line at ω = 0.4π ~ 1.257 
+xline(1.257, 'REPLACE_WITH_DASH_DASHr', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
+yline(1, 'REPLACE_WITH_DASH_DASH')
+
+% Use Project function to define the pass band width
+Passband = PBWidth(H20(idx:end),w(idx:end),0.5);
+
+% Display passband width for L = 20 BPF
+fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L = 20 filter\n', Passband);
+
+
+
+% BPF for L = 80 using project function 
+H80 = BPFsimp(wc, 80, N);
+
+% Plot magnitude of the frequency response for L = 80 BPF
+figure(4); clf;
+plot(w(idx:end), abs(H80(idx:end)));
+title('Magnitude of Frequency Response ');
+xlabel('\omega (rad)');
+ylabel('|H(\omega)|');
+
+% Add a vertical line at ω = 0.4π ~ 1.257 
+xline(1.257, 'REPLACE_WITH_DASH_DASHr', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
+yline(1, 'REPLACE_WITH_DASH_DASH')
+
+% Use Project function to define the pass band width
+Passband = PBWidth(H80(idx:end),w(idx:end),0.5);
+
+% Display passband width for L = 80 BPF
+fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L = 80 filter\n', Passband);
+
+% It is obvious from the figures that as L increases, the width of the pass
+% band narrows. At half the original length, the passband is twice as wide;
+% at twice the original length, the passband is half as wide.
+
+%% 4.2) A Better BPF
+% Use a Hamming window to adjust the BPF where now:
+%  h(n) = (0.54-0.46*cos(2*pi*n/(L-1)))cos(wc(n-(L-1)/2)), n = 1,2,3,...,L-1
+
+%% 4.2a) Same as 4.1a) for new filter where wc = 0.25*pi and L = 41. Also, measure response at w = {0, 0.1*pi, 0.25*pi, 0.4*pi, 0.5*pi, 0.75*pi}
+clear
+
+% Begin Filter analysis
+L = 41; % Length of Filter
+N = 2048; % # of Points for the DFT
+w = -pi: 2*pi/N: pi - 2*pi/N; % Define frequency range 
+wc = 0.25*pi; % Cutoff frequency for the filter
+
+% Use Project function to define better bandpass filter 
+H = BPFbetter(wc, L, N);
+idx = N/2 + 1; % Define start index for positive frequencies
+
+% Plot magnitude of the frequency response
+figure(5); clf;
+plot(w(idx:end), abs(H(idx:end)));
+title('Magnitude of Frequency Response ');
+xlabel('\omega (rad)');
+ylabel('|H(\omega)|');
+
+% Add a vertical line at ω = 0.25π ~ 0.7854
+xline(0.7854, 'REPLACE_WITH_DASH_DASHr', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
+
+% This Plot shows the positive index of our bandpass better filter with the main
+% lobe centered at wc = 0.25*pi. We see very low side lobes coming off of our main 
+% lobe. This suggests our passband threshold can be much closer to 0   
+
+% Plot phase for frequency response 
+figure(6); clf;
+plot(w(idx:end), angle(H(idx:end)));
+title('Phase of Frequency Response');
+xlabel('\omega (rad)');
+ylabel('\Theta(\omega)');
+
+% This is the Phase of our passband which is linear in the region of each
+% of the main lobe, but is not consistently linear in the regions of the
+% side lobes. For our FIR filter this is as expected for a non normalized signal.
+
+
+
+% Use find function to calculate frequency response at the desired frequencies
+
+% Define intermediate function for response at positive frequencies for
+% indexing purposes
+G = H(idx:end);
+
+% Define values of omega
+selected_w = [0, 0.1*pi, 0.25*pi, 0.4*pi, 0.5*pi, 0.75*pi];
+
+% Initialize an array to store the magnitudes at selected frequencies
+H_for_selected_w = zeros(1, length(selected_w));
+
+
+% Initalize an array of values for the target indicies to find H
+target_idx = zeros(1, length(selected_w));
+
+% Calculate H by finding the correct index in the range of frequencies
+for i = 1:length(selected_w)
+    % Find all the indices in w(idx:end) closest to the desired frequency
+    target_idx = find(abs(w(idx:end) - selected_w(i)) <= 1e-2);
+    
+    % Getting the H vlaues using our intermediate function G evaluated at
+    % the fourth of the 6 indices found
+    H_for_selected_w(i) = abs(G(target_idx(4)));
+end
+
+% Display the magnitudes for the selected frequencies
+fprintf('|H(\x03c9)| for selected values of \x03c9:\n');
+for i = 1:length(selected_w)
+    fprintf('  %.2f\x03c0: %.4f\n', selected_w(i)/pi, H_for_selected_w(i));
+end
+
+% This list of Responses makes sense, you can just look at the graph. Most
+% of the values of w are close to zero, but the value at wc = 0.25*pi is
+% much higher (at 10.88) since that is the center of the passband and all the other
+% selected frequencies fall outside the passband.
+
+%% 4.2b) Find the passband width at a threshold level of 50%. Then plot the graphs for two more BPFs at L = 21 and L = 81 and get their passbands.
+
+% 50% of the maximum 10.88 is 5.44, so this defines our threshold. 
+
+% This threshold can be calculated by
+th = max(abs(G)) * 0.5;
+
+% We can use the same function defined in part 4.1(b) 
+Passband = PBWidth(G,w(idx:end),th);
+
+% Display passband width for L = 41
+fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L = 41 filter\n', Passband);
+
+
+
+% We now define the BPF for L = 21
+H21 = BPFbetter(wc, 21, N);
+idx = N/2 + 1; % Define start index for positive frequencies
+
+% Plot magnitude of the frequency response for L = 21
+figure(7); clf;
+plot(w(idx:end), abs(H21(idx:end)));
+title('Magnitude of Frequency Response ');
+xlabel('\omega (rad)');
+ylabel('|H(\omega)|');
+
+% Add a vertical line at ω = 0.25π ~ 0.7854
+xline(0.7854, 'REPLACE_WITH_DASH_DASHr', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
+
+% Set a threshold based on the peak value for H21
+th21 = max(abs(H21(idx:end))) * 0.5;
+
+% Use PBWidth with the updated threshold
+Passband21 = PBWidth(H21(idx:end), w(idx:end), th21);
+
+% Display passband width for L = 21
+fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L = 21 filter\n', Passband21);
+
+
+
+% And now for the analysis of the L = 81 BPF
+H81 = BPFbetter(wc, 81, N);
+idx = N/2 + 1; % Define start index for positive frequencies
+
+% Plot magnitude of the frequency response for L = 81
+figure(8); clf;
+plot(w(idx:end), abs(H81(idx:end)));
+title('Magnitude of Frequency Response ');
+xlabel('\omega (rad)');
+ylabel('|H(\omega)|');
+
+% Add a vertical line at ω = 0.25π ~ 0.7854
+xline(0.7854, 'REPLACE_WITH_DASH_DASHr', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
+
+% Set a threshold based on the peak value for H81
+th81 = max(abs(H81(idx:end))) * 0.5;
+
+% Use PBWidth with the updated threshold
+Passband81 = PBWidth(H81(idx:end), w(idx:end), th81);
+
+% Display passband width for L = 81
+fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L = 81 filter\n', Passband81);
+
+% The relationship is similar to that found in part 7.1 (c) in terms of the
+% passband width. However, this filter is not normalized, so the magnitude
+% of the frequency response changes depending on the value of L that you
+% chose. Lower values of L will mean that the passband has less gain, and
+% a higher value of L will correlate to more gain.
+
+
+%% 4.2c)
+
+%% 4.2d)
+
+%% 5.1
+BP_Filters = readtable("Bandpass_Filters.xlsx"); % Load Bandpass filters from file
+BP_Filters(8:11,:) = []; % Removes unnecessary rows
+%% 5.2a) See function "HanningNorm(wc, L, N);"
+%% 5.2b)
+wc = BP_Filters.CenterFreq_omegaC_;
+N = 2048; % # of Points for the DFT
+w = -pi: 2*pi/N: pi - 2*pi/N;%Frequency range
+% Filters for octaves 1-7. L was determined through trial and error and was
+% chosen based on which L generated a bandwidth closest to the design
+% bandwidth for each octave.
+% L = [519, 251, 128,63,32,17,9];% Values originally found for 0.5 stopband
+L = [943, 546, 246,133, 67, 34, 17]; % Values with a 0.01 stopband
+
+
+%% 5.2c)
+HOct7 = HammingNorm(wc(7),L(7),N);
+HOct6 = HammingNorm(wc(6),L(6),N);
+HOct5 = HammingNorm(wc(5),L(5),N);
+HOct4 = HammingNorm(wc(4),L(4),N);
+HOct3 = HammingNorm(wc(3),L(3),N);
+HOct2 = HammingNorm(wc(2),L(2),N);
+HOct1 = HammingNorm(wc(1),L(1),N);
+HOctTot = [HOct1;HOct2;HOct3;HOct4;HOct5;HOct6;HOct7];
+whalf = w(length(w)/2:end);
+HOctHalf = HOctTot(:,length(w)/2:end);
+figure(9)
+plot(whalf,abs(HOctHalf),LineWidth=2)
+hold on
+xline(wc, 'REPLACE_WITH_DASH_DASHr', strcat('\omega = ' , string(wc)), 'LabelOrientation', 'aligned', 'LabelVerticalAlignment','middle');
+
+%% 5.3a)
+fs = 8000;              % Sampling frequency
+t = 0:1/fs:0.85;        % Time vector from 0 to 0.85 seconds with 1/fs step
+xx = zeros(size(t));    % Initialize signal vector
+
+% Define the three time intervals
+interval1 = (t >= 0) & (t < 0.25);
+interval2 = (t >= 0.3) & (t < 0.55);
+interval3 = (t >= 0.6) & (t < 0.85);
+
+% Add sinusoids in each time interval
+xx(interval1) = cos(2*pi*220*t(interval1));
+xx(interval2) = cos(2*pi*880*t(interval2));
+xx(interval3) = cos(2*pi*440*t(interval3)) + cos(2*pi*1760*t(interval3));
+
+% Plot the signal
+figure(10);
+plot(t, xx);
+title('Generated Signal x(t)');
+xlabel('Time (s)');
+ylabel('Amplitude');
+grid on;
+
+%% 5.3b)
+% Frequency bands for 5 BPF
+bands = [BP_Filters(2, "StartingFreq_Hz_"), BP_Filters(2, "EndingFreq_Hz_"); 
+        BP_Filters(3, "StartingFreq_Hz_"), BP_Filters(3, "EndingFreq_Hz_"); 
+        BP_Filters(4, "StartingFreq_Hz_"), BP_Filters(4, "EndingFreq_Hz_");
+        BP_Filters(5, "StartingFreq_Hz_"), BP_Filters(5, "EndingFreq_Hz_");
+        BP_Filters(6, "StartingFreq_Hz_"), BP_Filters(6, "EndingFreq_Hz_");];
+L = 101;                 % Filter length
+N = 1024;                % FFT size for frequency response
+numBands = size(bands, 1);
+filterOutputs = zeros(numBands, length(xx)); % To store filter outputs
+
+for i = 1:numBands
+    % Calculate center frequency and normalized cutoff
+    fc = (bands{i, "StartingFreq_Hz_"} + bands{i, "EndingFreq_Hz_"}) / 2;
+    wc = 2 * pi * fc / fs; % Convert to normalized frequency
+    
+    % Call HammingNorm to generate frequency response
+    H = HammingNorm(wc, L, N); % Obtain frequency response
+    
+    % Apply the filter (IFFT to create time-domain filter coefficients)
+    h = ifft(ifftshift(H), 'symmetric');
+    h = h(1:L); % Trim to filter length
+    
+    % Filter the signal
+    filterOutputs(i, :) = filter(h, 1, xx);
+end
+    
+%% 5.3c)
+% Plot Frequency Responses for All Filters
+figure(11);
+for i = 1:numBands
+    subplot(numBands, 1, i);
+    plot(t, filterOutputs(i, :));
+    title(['Filter Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
+        '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
+    xlabel('Time (s)');
+    ylabel('Amplitude');
+    grid on;
+end
+
+%% 5.3d) Validate Output Signals by Comparing Magnitudes and Phases
+% Frequency responses for validation
+filterOutputMaxFreq = zeros(3, numBands);
+regionIndex = [1, 0.25*fs; 0.3*fs, 0.55*fs; 0.6*fs, 0.85*fs];
+regions = {xx(1:0.25*fs), xx(0.3*fs:0.55*fs), xx(0.6*fs:0.85*fs)}; % Cell array to store regions
+regionOctave = zeros(3, 1); % To store octave results for each region
+
+%For the input signal xx, based on the given definition:
+
+%xx1 is a sinusoid at 220 Hz → Expected Octave = 3.
+%xx2 is a sinusoid at 880 Hz → Expected Octave = 5.
+%xx3 contains 440 Hz and 1760 Hz → Expected Octaves = 4.
+
+% Validation of Regions
+expectedOctaves = [3, 5, 4]; % Expected octaves for xx1, xx2, xx3
+
+% Define frequency axis limits
+f = (0:N-1) * (fs / N);
+maxFreqIndex = find(f <= BP_Filters{6, "EndingFreq_Hz_"}); 
+maxFreqIndex = maxFreqIndex(end);
+minFreqIndex = find(f >= BP_Filters{1, "StartingFreq_Hz_"}); 
+minFreqIndex = minFreqIndex(1);
+
+for regionIdx = 1:3
+    currentRegion = regions{regionIdx}; % Select the current region (xx1, xx2, xx3)
+    
+    % Initialize storage for filter outputs in the current region
+    filterOutputs = zeros(numBands, length(currentRegion));
+    maxMagnitudes = zeros(1, numBands); % To store the max magnitude for each filter band
+    
+    % Filter each region
+    for i = 1:numBands
+        % Calculate center frequency and normalized cutoff
+        fc = (bands{i, "StartingFreq_Hz_"} + bands{i, "EndingFreq_Hz_"}) / 2;
+        wc = 2 * pi * fc / fs; % Convert to normalized frequency
+
+        % Call HammingNorm to generate frequency response
+        H = HammingNorm(wc, L, N); % Obtain frequency response
+
+        % Apply the filter (IFFT to create time-domain filter coefficients)
+        h = ifft(ifftshift(H), 'symmetric');
+        h = h(1:L); % Trim to filter length
+
+        % Filter the current region signal
+        filterOutputs(i, :) = filter(h, 1, currentRegion);
+    end
+
+    % Compute and store the max frequencies for validation
+    figure(regionIdx + 11); % Start figure numbering from 12
+    sgtitle(['Region ', num2str(regionIdx)]);
+
+    for i = 1:numBands
+        % Fourier Transform of the filter output
+        Y = fft(filterOutputs(i, :), N);
+        Y = Y(minFreqIndex:maxFreqIndex);
+        f_band = f(minFreqIndex:maxFreqIndex);
+
+        % Magnitude and phase plots
+        subplot(numBands, 2, 2*i-1);
+        plot(f_band, abs(Y));
+        title(['Magnitude of Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
+            '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
+        xlabel('Frequency (Hz)');
+        xlim([f_band(1) f_band(end)]);
+        ylabel('Magnitude');
+        grid on;
+
+        subplot(numBands, 2, 2*i);
+        plot(f_band, angle(Y) / pi);
+        title(['Phase of Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
+            '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
+        xlabel('Frequency (Hz)');
+        xlim([f_band(1) f_band(end)]);
+        ylabel('Phase (\pi radians)');
+        grid on;
+
+        % Find the max magnitude for the current band
+        maxMagnitudes(i) = max(abs(Y));
+    end
+    
+    % Determine the octave for the region based on the band with the highest peak
+    [~, maxBandIdx] = max(maxMagnitudes); % Index of the band with the highest peak
+    regionOctave(regionIdx) = maxBandIdx + 1; % Octave is band index + 1
+    
+    % Display the result
+    disp(['Region ', num2str(regionIdx), ' belongs to Octave ', num2str(regionOctave(regionIdx))]);
+end
+
+validationPassed = true; % Flag to track validation status
+
+for regionIdx = 1:3
+    fprintf('Validating Region %d...\n', regionIdx);
+    fprintf('Computed Octave: %d | Expected Octave: %d\n', regionOctave(regionIdx), expectedOctaves(regionIdx));
+    
+    if regionOctave(regionIdx) == expectedOctaves(regionIdx)
+        fprintf('Region %d: Validation Passed.\n', regionIdx);
+    else
+        fprintf('Region %d: Validation Failed!\n', regionIdx);
+        validationPassed = false;
+    end
+end
+
+if validationPassed
+    disp('All regions passed validation!');
+else
+    disp('Some regions failed validation. Check the filtering and analysis.');
+end
+
+%% 5.3e)
+% Define filter length and sampling frequency
+L = length(h); % Filter length
+transientDuration = L / fs; % Transient duration in seconds
+
+fprintf('Transient Duration: %.4f seconds\n', transientDuration);
+
+% Analyze transient effects for each filter in each region
+for regionIdx = 1:3
+    currentRegion = regions{regionIdx}; % Select the current region
+    filterOutputs = zeros(numBands, length(currentRegion));
+    
+    % Apply each filter to the current region
+    for i = 1:numBands
+        % Calculate center frequency and normalized cutoff
+        fc = (bands{i, "StartingFreq_Hz_"} + bands{i, "EndingFreq_Hz_"}) / 2;
+        wc = 2 * pi * fc / fs; % Convert to normalized frequency
+
+        % Call HammingNorm to generate frequency response
+        H = HammingNorm(wc, L, N); % Obtain frequency response
+        h = ifft(ifftshift(H), 'symmetric'); % Filter coefficients
+        h = h(1:L); % Trim to filter length
+
+        % Filter the signal
+        filterOutputs(i, :) = filter(h, 1, currentRegion);
+
+        % Plot transient effects
+        figure(regionIdx + 20); % Separate figure for each region
+        subplot(numBands, 1, i);
+        plot((0:length(currentRegion)-1) / fs, filterOutputs(i, :));
+        hold on;
+        xline(transientDuration, 'rREPLACE_WITH_DASH_DASH', 'LineWidth', 1.5); % Mark transient duration
+        title(['Filter Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
+            '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
+        xlabel('Time (s)');
+        xlim([0 0.1])
+        ylabel('Amplitude');
+        sgtitle(['First 0.1 Secconds of Region ', num2str(regionIdx)]);
+        grid on;
+        hold off;
+    end
+end
+
+% The transient duration lasts roughly 12.6 ms which can be seen in the
+% plots indicated by the red vertical line. The duration is the same for
+% each filter in the bank.
+%%  Project Functions
+
+% Simple Band Pass Filter (4.1a)
+
+% Function for bandpass filter frequency response
+function H = BPFsimp(wc, L, N)
+    h = zeros(1, L); % Initialize impulse response
+    % For loop defining impulse Response for BPF
+    for n = 0:L-1
+        h(n+1) = (2 / L) * cos(wc * n); 
+    end
+    % Frequency response for the bandpass filter
+H = fftshift(fft(h,N)); % Take N-point DFT of Bandpass filter and shift 0 frequency to center
+
+end
+
+
+% Width of pass band (4.1b)
+
+% Function that finds passband width using the magnitude response, omega,
+% and the threshold level for the passband.
+
+function Passband = PBWidth(H,w,th)
+
+% Find frequencies where |H(w)| is above threshold
+Hmag = abs(H); % Defintion of magnitude response
+H1 = find(Hmag >= th, 1, 'first'); % Find first index where |H(w)| is close to threshold
+H2 = find(Hmag >= th, 1, 'last'); % Find last index where |H(w)| is close to threshold
+
+% Convert indices to frequency values
+w1 = w(H1); % Frequency at start of passband
+w2 = w(H2); % Frequency at end of passband
+Passband = w2 - w1; % Width of the passband
+end
+
+% Better Bandpass filter
+
+% Function for bandpass filter frequency response
+function H = BPFbetter(wc, L, N)
+    h = zeros(1, L); % Initialize impulse response
+    
+    % For loop defining impulse Response for BPF with Hamming window
+    for n = 0:L-1
+        h(n+1) = (0.54 - 0.46 * cos(2 * pi * n / (L - 1))) * cos(wc * (n - (L - 1) / 2)); 
+    end
+
+    % Frequency response for the bandpass filter
+H = fftshift(fft(h,N)); % Take N-point DFT of Bandpass filter and shift 0 frequency to center
+
+end
+
+% Normalized Hanning Bandpass Filter (5.2)
+
+% Same as function "BPFbetter" but with a scaling term "B" so that the
+% maximum value at the center frequency is equal to one.
+function H = HammingNorm(wc, L, N)
+    h = zeros(1, L); % Initialize impulse response
+    
+    % For loop defining impulse Response for BPF with Hamming window
+    for n = 0:L-1
+        h(n+1) = (0.54 - 0.46 * cos(2 * pi * n / (L - 1))) * cos(wc * (n - (L - 1) / 2)); 
+    end
+    % Frequency response for the bandpass filter
+H1 = fftshift(fft(h,N)); % Take N-point DFT of Bandpass filter and shift 0 frequency to center
+B = 1/max(abs(H1));% Scaling factor so that max(abs(H)) = 1.
+H = B*H1;
+end
+##### SOURCE END #####
+--></body></html>
