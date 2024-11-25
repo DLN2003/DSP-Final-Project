@@ -361,6 +361,15 @@ regionIndex = [1, 0.25*fs; 0.3*fs, 0.55*fs; 0.6*fs, 0.85*fs];
 regions = {xx(1:0.25*fs), xx(0.3*fs:0.55*fs), xx(0.6*fs:0.85*fs)}; % Cell array to store regions
 regionOctave = zeros(3, 1); % To store octave results for each region
 
+%For the input signal xx, based on the given definition:
+
+%xx1 is a sinusoid at 220 Hz → Expected Octave = 3.
+%xx2 is a sinusoid at 880 Hz → Expected Octave = 5.
+%xx3 contains 440 Hz and 1760 Hz → Expected Octaves = 4.
+
+% Validation of Regions
+expectedOctaves = [3, 5, 4]; % Expected octaves for xx1, xx2, xx3
+
 % Define frequency axis limits
 f = (0:N-1) * (fs / N);
 maxFreqIndex = find(f <= BP_Filters{6, "EndingFreq_Hz_"}); 
@@ -433,9 +442,66 @@ for regionIdx = 1:3
     disp(['Region ', num2str(regionIdx), ' belongs to Octave ', num2str(regionOctave(regionIdx))]);
 end
 
-% Comment on validation
-disp('Check that the magnitude peaks match the expected frequencies of the input signal.');
-disp('Verify that the phase remains consistent for sinusoids in each filter band.');
+validationPassed = true; % Flag to track validation status
+
+for regionIdx = 1:3
+    fprintf('Validating Region %d...\n', regionIdx);
+    fprintf('Computed Octave: %d | Expected Octave: %d\n', regionOctave(regionIdx), expectedOctaves(regionIdx));
+    
+    if regionOctave(regionIdx) == expectedOctaves(regionIdx)
+        fprintf('Region %d: Validation Passed.\n', regionIdx);
+    else
+        fprintf('Region %d: Validation Failed!\n', regionIdx);
+        validationPassed = false;
+    end
+end
+
+if validationPassed
+    disp('All regions passed validation!');
+else
+    disp('Some regions failed validation. Check the filtering and analysis.');
+end
+
+%% 5.3e)
+% Define filter length and sampling frequency
+L = length(h); % Filter length
+transientDuration = L / fs; % Transient duration in seconds
+
+fprintf('Transient Duration: %.4f seconds\n', transientDuration);
+
+% Analyze transient effects for each filter in each region
+for regionIdx = 1:3
+    currentRegion = regions{regionIdx}; % Select the current region
+    filterOutputs = zeros(numBands, length(currentRegion));
+    
+    % Apply each filter to the current region
+    for i = 1:numBands
+        % Calculate center frequency and normalized cutoff
+        fc = (bands{i, "StartingFreq_Hz_"} + bands{i, "EndingFreq_Hz_"}) / 2;
+        wc = 2 * pi * fc / fs; % Convert to normalized frequency
+
+        % Call HammingNorm to generate frequency response
+        H = HammingNorm(wc, L, N); % Obtain frequency response
+        h = ifft(ifftshift(H), 'symmetric'); % Filter coefficients
+        h = h(1:L); % Trim to filter length
+
+        % Filter the signal
+        filterOutputs(i, :) = filter(h, 1, currentRegion);
+
+        % Plot transient effects
+        figure(regionIdx + 20); % Separate figure for each region
+        subplot(numBands, 1, i);
+        plot((0:length(currentRegion)-1) / fs, filterOutputs(i, :));
+        hold on;
+        xline(transientDuration, 'r--', 'LineWidth', 1.5); % Mark transient duration
+        title(['Filter Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
+            '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
+        xlabel('Time (s)');
+        ylabel('Amplitude');
+        grid on;
+        hold off;
+    end
+end
 %%  Project Functions
 
 % Simple Band Pass Filter (4.1a)
