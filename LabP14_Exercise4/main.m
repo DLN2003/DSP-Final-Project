@@ -491,15 +491,15 @@ for regionIdx = 1:3
         % Plot transient effects
         figure(regionIdx + 20); % Separate figure for each region
         subplot(numBands, 1, i);
-        plot((0:length(currentRegion)-1) / fs, filterOutputs(i, :));
+        plot(((0:length(currentRegion)-1) / fs), filterOutputs(i, :));
         hold on;
         xline(transientDuration, 'r--', 'LineWidth', 1.5); % Mark transient duration
         title(['Filter Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
             '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
         xlabel('Time (s)');
-        xlim([0 0.1])
+        xlim([0 0.05])
         ylabel('Amplitude');
-        sgtitle(['First 0.1 Secconds of Region ', num2str(regionIdx)]);
+        sgtitle(['First 5 Secconds of Region ', num2str(regionIdx)]);
         grid on;
         hold off;
     end
