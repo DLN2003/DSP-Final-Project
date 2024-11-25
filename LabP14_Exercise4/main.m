@@ -497,11 +497,17 @@ for regionIdx = 1:3
         title(['Filter Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
             '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
         xlabel('Time (s)');
+        xlim([0 0.1])
         ylabel('Amplitude');
+        sgtitle(['First 0.1 Secconds of Region ', num2str(regionIdx)]);
         grid on;
         hold off;
     end
 end
+
+% The transient duration lasts roughly 12.6 ms which can be seen in the
+% plots indicated by the red vertical line. The duration is the same for
+% each filter in the bank.
 %%  Project Functions
 
 % Simple Band Pass Filter (4.1a)
