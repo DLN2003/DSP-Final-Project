@@ -14,3 +14,4 @@ function H = HammingNorm(wc, L, N)
 H1 = fftshift(fft(h,N)); % Take N-point DFT of Bandpass filter and shift 0 frequency to center
 B = 1/max(abs(H1));% Scaling factor so that max(abs(H)) = 1.
 H = B*H1;
+end
