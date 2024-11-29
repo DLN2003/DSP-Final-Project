@@ -1,0 +1,3 @@
+%% 5.1
+BP_Filters = readtable("Bandpass_Filters.xlsx"); % Load Bandpass filters from file
+BP_Filters(8:11,:) = []; % Removes unnecessary rows
