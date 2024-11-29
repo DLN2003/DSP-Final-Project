@@ -531,7 +531,7 @@ end
 % each filter in the bank.
 %%  Project Functions
 
-% Simple Band Pass Filter (4.1a)
+%% Simple Band Pass Filter (4.1a)
 
 % Function for bandpass filter frequency response
 function H = BPFsimp(wc, L, N)
@@ -546,7 +546,7 @@ H = fftshift(fft(h,N)); % Take N-point DFT of Bandpass filter and shift 0 freque
 end
 
 
-% Width of pass band (4.1b)
+%% Width of pass band (4.1b)
 
 % Function that finds passband width using the magnitude response, omega,
 % and the threshold level for the passband.
@@ -564,7 +564,7 @@ w2 = w(H2); % Frequency at end of passband
 Passband = w2 - w1; % Width of the passband
 end
 
-% Better Bandpass filter
+%% Better Bandpass filter
 
 % Function for bandpass filter frequency response
 function H = BPFbetter(wc, L, N)
@@ -580,7 +580,7 @@ H = fftshift(fft(h,N)); % Take N-point DFT of Bandpass filter and shift 0 freque
 
 end
 
-% Normalized Hanning Bandpass Filter (5.2)
+%% Normalized Hanning Bandpass Filter (5.2)
 
 % Same as function "BPFbetter" but with a scaling term "B" so that the
 % maximum value at the center frequency is equal to one.
