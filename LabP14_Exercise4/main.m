@@ -18,7 +18,7 @@ H = BPFsimp(wc, L, N); % Obtain frequency response of Bandpass filter
 idx = N/2 + 1; % Define start index for positive frequencies
 
 % Plot magnitude of the frequency response
-figure(1); clf;
+figure; clf;
 plot(w(idx:end), abs(H(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -33,7 +33,7 @@ yline(1, '--')
 % the threshold level we choose for our passband cannot be too close to 0.
 
 % Plot phase for frequency response 
-figure(2); clf;
+figure; clf;
 plot(w(idx:end), angle(H(idx:end)));
 title('Phase of Frequency Response');
 xlabel('\omega (rad)');
@@ -62,7 +62,7 @@ fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L 
 H20 = BPFsimp(wc, 20, N);
 
 % Plot magnitude of the frequency response for L = 20 BPF
-figure(3); clf;
+figure; clf;
 plot(w(idx:end), abs(H20(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -80,11 +80,11 @@ fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L 
 
 
 
-% BPF for L = 80 using project function 
+%% BPF for L = 80 using project function 
 H80 = BPFsimp(wc, 80, N);
 
 % Plot magnitude of the frequency response for L = 80 BPF
-figure(4); clf;
+figure; clf;
 plot(w(idx:end), abs(H80(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -122,21 +122,21 @@ H = BPFbetter(wc, L, N);
 idx = N/2 + 1; % Define start index for positive frequencies
 
 % Plot magnitude of the frequency response
-figure(5); clf;
+figure; clf;
 plot(w(idx:end), abs(H(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
 ylabel('|H(\omega)|');
 
 % Add a vertical line at ω = 0.25π ~ 0.7854
-xline(0.7854, '--r', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
+xline(0.7854, '--r', '\omega = 0.25\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
 
 % This Plot shows the positive index of our bandpass better filter with the main
 % lobe centered at wc = 0.25*pi. We see very low side lobes coming off of our main 
 % lobe. This suggests our passband threshold can be much closer to 0   
 
 % Plot phase for frequency response 
-figure(6); clf;
+figure; clf;
 plot(w(idx:end), angle(H(idx:end)));
 title('Phase of Frequency Response');
 xlabel('\omega (rad)');
@@ -148,7 +148,7 @@ ylabel('\Theta(\omega)');
 
 
 
-% Use find function to calculate frequency response at the desired frequencies
+%% Use find function to calculate frequency response at the desired frequencies
 
 % Define intermediate function for response at positive frequencies for
 % indexing purposes
@@ -160,6 +160,8 @@ selected_w = [0, 0.1*pi, 0.25*pi, 0.4*pi, 0.5*pi, 0.75*pi];
 % Initialize an array to store the magnitudes at selected frequencies
 H_for_selected_w = zeros(1, length(selected_w));
 
+% Initialize phase for part 4.2c)
+Phase_for_selected_w = zeros(1, length(selected_w));
 
 % Initalize an array of values for the target indicies to find H
 target_idx = zeros(1, length(selected_w));
@@ -167,17 +169,23 @@ target_idx = zeros(1, length(selected_w));
 % Calculate H by finding the correct index in the range of frequencies
 for i = 1:length(selected_w)
     % Find all the indices in w(idx:end) closest to the desired frequency
-    target_idx = find(abs(w(idx:end) - selected_w(i)) <= 1e-2);
+    target_idx = find(abs(w(idx:end) - selected_w(i)) <= 0.0013);
     
-    % Getting the H vlaues using our intermediate function G evaluated at
-    % the fourth of the 6 indices found
-    H_for_selected_w(i) = abs(G(target_idx(4)));
+    % Getting the magnitude and phase values for the target indices
+    H_for_selected_w(i) = abs(G(target_idx));
+    Phase_for_selected_w(i) = angle(G(target_idx));
 end
 
 % Display the magnitudes for the selected frequencies
 fprintf('|H(\x03c9)| for selected values of \x03c9:\n');
 for i = 1:length(selected_w)
     fprintf('  %.2f\x03c0: %.4f\n', selected_w(i)/pi, H_for_selected_w(i));
+end
+
+% Display values of phase for part 4.2c)
+fprintf('\x0398(\x03c9) for selected values of \x03c9:\n');
+for i = 1:length(selected_w)
+    fprintf('  %.2f\x03c0: %.4f\n', selected_w(i)/pi, Phase_for_selected_w(i));
 end
 
 % This list of Responses makes sense, you can just look at the graph. Most
@@ -200,19 +208,19 @@ fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L
 
 
 
-% We now define the BPF for L = 21
+%% We now define the BPF for L = 21
 H21 = BPFbetter(wc, 21, N);
 idx = N/2 + 1; % Define start index for positive frequencies
 
 % Plot magnitude of the frequency response for L = 21
-figure(7); clf;
+figure; clf;
 plot(w(idx:end), abs(H21(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
 ylabel('|H(\omega)|');
 
 % Add a vertical line at ω = 0.25π ~ 0.7854
-xline(0.7854, '--r', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
+xline(0.7854, '--r', '\omega = 0.25\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
 
 % Set a threshold based on the peak value for H21
 th21 = max(abs(H21(idx:end))) * 0.5;
@@ -225,19 +233,19 @@ fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L
 
 
 
-% And now for the analysis of the L = 81 BPF
+%% And now for the analysis of the L = 81 BPF
 H81 = BPFbetter(wc, 81, N);
 idx = N/2 + 1; % Define start index for positive frequencies
 
 % Plot magnitude of the frequency response for L = 81
-figure(8); clf;
+figure; clf;
 plot(w(idx:end), abs(H81(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
 ylabel('|H(\omega)|');
 
 % Add a vertical line at ω = 0.25π ~ 0.7854
-xline(0.7854, '--r', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
+xline(0.7854, '--r', '\omega = 0.25\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
 
 % Set a threshold based on the peak value for H81
 th81 = max(abs(H81(idx:end))) * 0.5;
@@ -255,9 +263,22 @@ fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L
 % a higher value of L will correlate to more gain.
 
 
-%% 4.2c)
+%% 4.2c) Given a specific input, determine the output signal by hand
 
-%% 4.2d)
+% Display image of hand written derivation of output as requested by the problem.
+filename = "Problem_4_2c.png";
+imshow(filename)
+%% 4.2d) Use frequency response to explain why the filter only passes at cutoff
+
+% Observing the frequency response of the 41-length filter from 4.2a) we
+% can see that the response is only significant at the 0.25*pi frequency.
+% The response dies down to very shallow side lobes outside of this
+% passband. If you observe the output equation from 4.2c) it is easy to see
+% that the magnitude of the response for an input centered anywhere in the
+% frequency range of the filter will be either amplified of attentuated by
+% the filter. If an input component falls within the passband, it will
+% be dominant in the output. However, if it falls within the stop-band, it
+% will be greatly attenuated and not be greatly represented in the output.
 
 %% 5.1
 BP_Filters = readtable("Bandpass_Filters.xlsx"); % Load Bandpass filters from file
