@@ -1,4 +1,4 @@
-%% Octave Band Filtering: Lab P-14: 4 Lab Exercises
+%% Octave Band Filtering: Lab P -14: Group 8
 clear;
 close all;
 %% 4.1 Simple Bandpass Filter 
