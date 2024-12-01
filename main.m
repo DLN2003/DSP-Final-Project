@@ -266,8 +266,8 @@ fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L
 %% 4.2c) Given a specific input, determine the output signal by hand
 
 % Display image of hand written derivation of output as requested by the problem.
-filename = "Problem_4_2c.png";
-imshow(filename)
+%filename = "Problem_4_2c.png";
+%imshow(filename)
 %% 4.2d) Use frequency response to explain why the filter only passes at cutoff
 
 % Observing the frequency response of the 41-length filter from 4.2a) we
@@ -398,6 +398,8 @@ maxFreqIndex = maxFreqIndex(end);
 minFreqIndex = find(f >= BP_Filters{1, "StartingFreq_Hz_"}); 
 minFreqIndex = minFreqIndex(1);
 
+maxMagnitude = [218.75, 34.7275, 259.087];
+
 for regionIdx = 1:3
     currentRegion = regions{regionIdx}; % Select the current region (xx1, xx2, xx3)
     
@@ -434,11 +436,12 @@ for regionIdx = 1:3
 
         % Magnitude and phase plots
         subplot(numBands, 2, 2*i-1);
-        plot(f_band, abs(Y));
-        title(['Magnitude of Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
+        plot(f_band, abs(Y) / maxMagnitude(regionIdx));
+        title(['Normalized Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
             '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
         xlabel('Frequency (Hz)');
         xlim([f_band(1) f_band(end)]);
+        ylim([0 1]);
         ylabel('Magnitude');
         grid on;
 
@@ -448,6 +451,7 @@ for regionIdx = 1:3
             '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
         xlabel('Frequency (Hz)');
         xlim([f_band(1) f_band(end)]);
+        ylim([-1 1]);
         ylabel('Phase (\pi rad)');
         grid on;
 
@@ -486,7 +490,7 @@ end
 %% 5.3e)
 % Define filter length and sampling frequency
 L = length(h); % Filter length
-transientDuration = L / fs; % Transient duration in seconds
+transientDuration = L / fs * 1000; % Transient duration in milliseconds
 
 fprintf('Transient Duration: %.4f seconds\n', transientDuration);
 
@@ -510,17 +514,17 @@ for regionIdx = 1:3
         filterOutputs(i, :) = filter(h, 1, currentRegion);
 
         % Plot transient effects
-        figure(regionIdx + 20); % Separate figure for each region
+        figure(regionIdx + 14); % Separate figure for each region
         subplot(numBands, 1, i);
-        plot(((0:length(currentRegion)-1) / fs), filterOutputs(i, :));
+        plot(((0:length(currentRegion)-1) / fs * 1000), filterOutputs(i, :));
         hold on;
         xline(transientDuration, 'r--', 'LineWidth', 1.5); % Mark transient duration
         title(['Filter Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
             '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
-        xlabel('Time (s)');
-        xlim([0 0.05])
+        xlabel('Time (ms)');
+        xlim([0 25])
         ylabel('Amplitude');
-        sgtitle(['First 5 Secconds of Region ', num2str(regionIdx)]);
+        sgtitle(['First 25ms of Region ', num2str(regionIdx)]);
         grid on;
         hold off;
     end
