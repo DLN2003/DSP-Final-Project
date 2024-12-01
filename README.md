@@ -22,7 +22,7 @@ This project focuses on the implementation and analysis of octave band filters u
 
 ### 1. Simple Bandpass Filter
 - **Impulse Response Formula:**  
-  $ h(n) = \frac{2}{L} \cos(\omega_c n), \quad 0 \leq n < L$  
+  $\ h(n) = \frac{2}{L} \cos(\omega_c n), \quad 0 \leq n < L\$  
 - **Key Steps:**  
   - Generate and analyze a bandpass filter with $\( \omega_c = 0.4\pi \) and \( L = 40 \)$.  
   - Measure passband width at 50% level.  
