@@ -30,7 +30,7 @@ This project focuses on the implementation and analysis of octave band filters u
 
 ### 2. Improved Bandpass Filter (Hamming Window)
 - **Impulse Response Formula:**  
-  $\ h(n) = (0.54 - 0.46 \cos(\frac{2\pi n}{L-1})) \cos(\omega_c (n - \frac{L-1}{2})), \quad 0 \leq n < L \$  
+  $\ h(n) = (0.54 - 0.46 \cos[\frac{2\pi n}{L-1}]) \cos(\omega_c [n - \frac{L-1}{2}]), \quad 0 \leq n < L \$  
 - **Key Steps:**  
   - Design filter for $\ \omega_c = 0.25\pi \$ and $\ L = 41 )$.  
   - Analyze frequency response at specific frequencies $\( \omega = 0, 0.1\pi, 0.25\pi, 0.4\pi, 0.5\pi, 0.75\pi \)$.  
