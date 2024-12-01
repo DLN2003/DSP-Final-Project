@@ -26,19 +26,19 @@ This project focuses on the implementation and analysis of octave band filters u
 - **Key Steps:**  
   - Generate and analyze a bandpass filter with $\( \omega_c = 0.4\pi \) and \( L = 40 \)$.  
   - Measure passband width at 50% level.  
-  - Observe the effect of changing $\( L \) (e.g., \( L = 20 \) and \( L = 80 \))$ on passband width.  
+  - Observe the effect of changing $\ L \$ (e.g., $\ L = 20 \$ and $\ L = 80 \$) on passband width.  
 
 ### 2. Improved Bandpass Filter (Hamming Window)
 - **Impulse Response Formula:**  
-  $\( h(n) = (0.54 - 0.46 \cos(\frac{2\pi n}{L-1})) \cos(\omega_c (n - \frac{L-1}{2})), \quad 0 \leq n < L \)$  
+  $\ h(n) = (0.54 - 0.46 \cos(\frac{2\pi n}{L-1})) \cos(\omega_c (n - \frac{L-1}{2})), \quad 0 \leq n < L \$  
 - **Key Steps:**  
-  - Design filter for $\( \omega_c = 0.25\pi \) and \( L = 41 \)$.  
-  - Analyze frequency response at specific frequencies $(\( \omega = 0, 0.1\pi, 0.25\pi, 0.4\pi, 0.5\pi, 0.75\pi \))$.  
-  - Compare passband widths for $\( L = 21 \), \( L = 41 \), and \( L = 81 \)$.  
+  - Design filter for $\ \omega_c = 0.25\pi \$ and $\ L = 41 )$.  
+  - Analyze frequency response at specific frequencies $\( \omega = 0, 0.1\pi, 0.25\pi, 0.4\pi, 0.5\pi, 0.75\pi \)$.  
+  - Compare passband widths for $\ L = 21 \$, $\ L = 41 \$, and $\ L = 81 \$.  
 
 ### 3. Application to Octave Band Filters
 - **Goal:** Create bandpass filters for seven octave bands.  
-- **Design:** Determine filter lengths $(\( L \))$ to match specified bandwidths.  
+- **Design:** Determine filter lengths $(\ L \)$ to match specified bandwidths.  
 - **Visualization:** Overlay the magnitude responses of all octave filters on a single plot.
 
 ---
