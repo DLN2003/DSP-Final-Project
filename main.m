@@ -48,7 +48,7 @@ ylabel('\Theta(\omega)');
 % Use Project function to define the pass band width
 Passband = PBWidth(H(idx:end),w(idx:end),0.5);
 
-% Display passband width
+% Display passband widthssssssssssssssdw
 fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L = 40 filter\n', Passband);
 
 % We can imagine this width drawn on our first plot, in 4.1a), between the sides of
@@ -398,8 +398,6 @@ maxFreqIndex = maxFreqIndex(end);
 minFreqIndex = find(f >= BP_Filters{1, "StartingFreq_Hz_"}); 
 minFreqIndex = minFreqIndex(1);
 
-maxMagnitude = [218.75, 34.7275, 259.087];
-
 for regionIdx = 1:3
     currentRegion = regions{regionIdx}; % Select the current region (xx1, xx2, xx3)
     
@@ -436,12 +434,11 @@ for regionIdx = 1:3
 
         % Magnitude and phase plots
         subplot(numBands, 2, 2*i-1);
-        plot(f_band, abs(Y) / maxMagnitude(regionIdx));
+        plot(f_band, abs(Y));
         title(['Normalized Output for Band ', num2str(round(bands{i, "StartingFreq_Hz_"})), ...
             '-', num2str(round(bands{i, "EndingFreq_Hz_"})), ' Hz']);
         xlabel('Frequency (Hz)');
         xlim([f_band(1) f_band(end)]);
-        ylim([0 1]);
         ylabel('Magnitude');
         grid on;
 
