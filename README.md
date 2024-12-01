@@ -7,7 +7,7 @@ This project focuses on the implementation and analysis of octave band filters u
 1. **Simple Bandpass Filter**  
    - Filter Design and Frequency Response Analysis  
    - Passband Width Calculation  
-   - Effect of Filter Length (L) on Passband Width  
+   - Effect of Filter Length, $`L`$ on Passband Width  
 2. **Improved Bandpass Filter with Hamming Window**  
    - Filter Design  
    - Frequency Response Analysis at Specific Frequencies  
@@ -26,7 +26,7 @@ This project focuses on the implementation and analysis of octave band filters u
 - **Key Steps:**  
   - Generate and analyze a bandpass filter with $\( \omega_c = 0.4\pi \) and \( L = 40 \)$.  
   - Measure passband width at 50% level.  
-  - Observe the effect of changing $\ L \$ (e.g., $\ L = 20 \$ and $\ L = 80 \$) on passband width.  
+  - Observe the effect of changing $` L `$ (e.g., $` L = 20 `$ and $` L = 80 `$) on passband width.  
 
 ### 2. Improved Bandpass Filter (Hamming Window)
 - **Impulse Response Formula:**  
