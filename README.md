@@ -35,7 +35,7 @@ This project focuses on the implementation and analysis of octave band filters u
   - Design filter for $` \omega_c = 0.25\pi `$ and $` L = 41 `$.  
   - Analyze frequency response at specific frequencies $` \omega = 0, 0.1\pi, 0.25\pi, 0.4\pi, 0.5\pi, 0.75\pi `$.  
   - Compare passband widths for $` L = 21 `$, $` L = 41 `$, and $` L = 81 `$.  
-
+![Preview](https://raw.githubusercontent.com/DLN2003/DSP-Final-Project/blob/main/html/main_05.png)
 ### 3. Application to Octave Band Filters
 - **Goal:** Create bandpass filters for seven-octave bands.  
 - **Design:** Determine filter lengths $` L `$ to match specified bandwidths.  
