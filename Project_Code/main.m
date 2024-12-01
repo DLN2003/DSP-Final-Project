@@ -7,18 +7,17 @@ close all;
 
 
 % Begin Filter analysis
-clear
 L = 40; % Length of Filter
 N = 2048; % # of Points for the DFT
 w = -pi: 2*pi/N: pi - 2*pi/N; % Define frequency range 
 wc = 0.4*pi; % Cutoff frequency for the filter
 
-% Frequency response for the bandpass filter
+%% Frequency response for the bandpass filter
 H = BPFsimp(wc, L, N); % Obtain frequency response of Bandpass filter
 idx = N/2 + 1; % Define start index for positive frequencies
 
-% Plot magnitude of the frequency response
-figure; clf;
+%% Plot magnitude of the frequency response
+figure(1);
 plot(w(idx:end), abs(H(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -27,28 +26,28 @@ ylabel('|H(\omega)|');
 % Add a vertical line at ω = 0.4π ~ 1.257
 xline(1.257, '--r', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
 yline(1, '--')
-
+snapnow;
 % This Plot shows the positive index of our bandpass filter with the main
 % lobe centered at wc. It's side lobes are reasonably large, meaning that
 % the threshold level we choose for our passband cannot be too close to 0.
 
-% Plot phase for frequency response 
-figure; clf;
+%% Plot phase for frequency response 
+figure(2);
 plot(w(idx:end), angle(H(idx:end)));
 title('Phase of Frequency Response');
 xlabel('\omega (rad)');
 ylabel('\Theta(\omega)');
-
+snapnow;
 % This is the Phase of our passband which is linear in the region of each
 % lobe, though the line centered at the cutoff frequency is larger &
 % actually representative of our phase. This is expected for an FIR filter.
 
 %% 4.1b) Using the 0.5 level passband, find width of passband 
 
-% Use Project function to define the pass band width
+%% Use Project function to define the pass band width
 Passband = PBWidth(H(idx:end),w(idx:end),0.5);
 
-% Display passband widthssssssssssssssdw
+%% Display passband width
 fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L = 40 filter\n', Passband);
 
 % We can imagine this width drawn on our first plot, in 4.1a), between the sides of
@@ -58,11 +57,11 @@ fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L 
 
 %% 4.1c) Make plots to measure the passband at L = 20 and L = 80 with wc the same; measure their passband widths
 
-% BPF for L = 20 using project function 
+%% BPF for L = 20 using project function 
 H20 = BPFsimp(wc, 20, N);
 
-% Plot magnitude of the frequency response for L = 20 BPF
-figure; clf;
+%% Plot magnitude of the frequency response for L = 20 BPF
+figure(3);
 plot(w(idx:end), abs(H20(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -71,11 +70,12 @@ ylabel('|H(\omega)|');
 % Add a vertical line at ω = 0.4π ~ 1.257 
 xline(1.257, '--r', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
 yline(1, '--')
+snapnow;
 
-% Use Project function to define the pass band width
+%% Use Project function to define the pass band width
 Passband = PBWidth(H20(idx:end),w(idx:end),0.5);
 
-% Display passband width for L = 20 BPF
+%% Display passband width for L = 20 BPF
 fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L = 20 filter\n', Passband);
 
 
@@ -83,8 +83,8 @@ fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L 
 %% BPF for L = 80 using project function 
 H80 = BPFsimp(wc, 80, N);
 
-% Plot magnitude of the frequency response for L = 80 BPF
-figure; clf;
+%% Plot magnitude of the frequency response for L = 80 BPF
+figure(4);
 plot(w(idx:end), abs(H80(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -93,13 +93,15 @@ ylabel('|H(\omega)|');
 % Add a vertical line at ω = 0.4π ~ 1.257 
 xline(1.257, '--r', '\omega = 0.4\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
 yline(1, '--')
-
-% Use Project function to define the pass band width
+snapnow;
+%% Use Project function to define the pass band width
 Passband = PBWidth(H80(idx:end),w(idx:end),0.5);
 
-% Display passband width for L = 80 BPF
+%% Display passband width for L = 80 BPF
 fprintf('Passband width @ the 0.5 level is approximately %.4f radians for the L = 80 filter\n', Passband);
 
+
+%% Explain
 % It is obvious from the figures that as L increases, the width of the pass
 % band narrows. At half the original length, the passband is twice as wide;
 % at twice the original length, the passband is half as wide.
@@ -121,8 +123,8 @@ wc = 0.25*pi; % Cutoff frequency for the filter
 H = BPFbetter(wc, L, N);
 idx = N/2 + 1; % Define start index for positive frequencies
 
-% Plot magnitude of the frequency response
-figure; clf;
+%% Plot magnitude of the frequency response
+figure(5);
 plot(w(idx:end), abs(H(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -130,18 +132,18 @@ ylabel('|H(\omega)|');
 
 % Add a vertical line at ω = 0.25π ~ 0.7854
 xline(0.7854, '--r', '\omega = 0.25\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
-
+snapnow;
 % This Plot shows the positive index of our bandpass better filter with the main
 % lobe centered at wc = 0.25*pi. We see very low side lobes coming off of our main 
 % lobe. This suggests our passband threshold can be much closer to 0   
 
-% Plot phase for frequency response 
-figure; clf;
+%% Plot phase for frequency response 
+figure(6);
 plot(w(idx:end), angle(H(idx:end)));
 title('Phase of Frequency Response');
 xlabel('\omega (rad)');
 ylabel('\Theta(\omega)');
-
+snapnow;
 % This is the Phase of our passband which is linear in the region of each
 % of the main lobe, but is not consistently linear in the regions of the
 % side lobes. For our FIR filter this is as expected for a non normalized signal.
@@ -212,8 +214,8 @@ fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L
 H21 = BPFbetter(wc, 21, N);
 idx = N/2 + 1; % Define start index for positive frequencies
 
-% Plot magnitude of the frequency response for L = 21
-figure; clf;
+%% Plot magnitude of the frequency response for L = 21
+figure(7)
 plot(w(idx:end), abs(H21(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -221,14 +223,14 @@ ylabel('|H(\omega)|');
 
 % Add a vertical line at ω = 0.25π ~ 0.7854
 xline(0.7854, '--r', '\omega = 0.25\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
-
+snapnow;
 % Set a threshold based on the peak value for H21
 th21 = max(abs(H21(idx:end))) * 0.5;
 
-% Use PBWidth with the updated threshold
+%% Use PBWidth with the updated threshold
 Passband21 = PBWidth(H21(idx:end), w(idx:end), th21);
 
-% Display passband width for L = 21
+%% Display passband width for L = 21
 fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L = 21 filter\n', Passband21);
 
 
@@ -237,8 +239,8 @@ fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L
 H81 = BPFbetter(wc, 81, N);
 idx = N/2 + 1; % Define start index for positive frequencies
 
-% Plot magnitude of the frequency response for L = 81
-figure; clf;
+%% Plot magnitude of the frequency response for L = 81
+figure(8)
 plot(w(idx:end), abs(H81(idx:end)));
 title('Magnitude of Frequency Response ');
 xlabel('\omega (rad)');
@@ -246,16 +248,18 @@ ylabel('|H(\omega)|');
 
 % Add a vertical line at ω = 0.25π ~ 0.7854
 xline(0.7854, '--r', '\omega = 0.25\pi', 'LabelOrientation', 'horizontal', 'LabelVerticalAlignment', 'middle');
-
+snapnow;
 % Set a threshold based on the peak value for H81
 th81 = max(abs(H81(idx:end))) * 0.5;
 
-% Use PBWidth with the updated threshold
+%% Use PBWidth with the updated threshold
 Passband81 = PBWidth(H81(idx:end), w(idx:end), th81);
 
-% Display passband width for L = 81
+%% Display passband width for L = 81
 fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L = 81 filter\n', Passband81);
 
+
+%% Explain
 % The relationship is similar to that found in part 7.1 (c) in terms of the
 % passband width. However, this filter is not normalized, so the magnitude
 % of the frequency response changes depending on the value of L that you
@@ -266,8 +270,9 @@ fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L
 %% 4.2c) Given a specific input, determine the output signal by hand
 
 % Display image of hand written derivation of output as requested by the problem.
-%filename = "Problem_4_2c.png";
-%imshow(filename)
+filename = "Problem_4_2c.png";
+imshow(filename)
+snapnow;
 %% 4.2d) Use frequency response to explain why the filter only passes at cutoff
 
 % Observing the frequency response of the 41-length filter from 4.2a) we
@@ -283,7 +288,13 @@ fprintf('Passband width @ the 50%% level is approximately %.4f radians for the L
 %% 5.1
 BP_Filters = readtable("Bandpass_Filters.xlsx"); % Load Bandpass filters from file
 BP_Filters(8:11,:) = []; % Removes unnecessary rows
+%% display the table for HTML
+Filters_Disp = readtable("Bandpass_Filters.xlsx", 'VariableNamingRule', 'preserve'); % Load Bandpass filters from file with original column names
+Filters_Disp(8:11, :) = []; % Removes unnecessary rows
+disp(Filters_Disp);  % Display the table 
+
 %% 5.2a) See function "HanningNorm(wc, L, N);"
+
 %% 5.2b)
 wc = BP_Filters.CenterFreq_omegaC_;
 N = 2048; % # of Points for the DFT
