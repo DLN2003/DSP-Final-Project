@@ -1,3 +1,15 @@
+% Authored By: Giovanni Gutierrez
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises
+%
+% This code defines a function that creates a BPF 
+% with a specified cutoff frequency, filter length 
+% and DFT length without windowing.
+% 
+
+
 %% Simple Band Pass Filter (used in 4.1a)
 
 % Function for bandpass filter frequency response
