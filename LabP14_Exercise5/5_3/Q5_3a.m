@@ -1,4 +1,17 @@
-%% 5.3a) (by David Needens Nov. 2024)
+% Authored By: David Needens
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 5.3 Piano Octave Decoding
+%
+% 
+% This MATLAB code generates a time-domain signal consisting of sinusoidal
+% components in three defined intervals, each with specific frequencies 
+% (% 220 Hz, 880 Hz, 440 Hz, and 1760 Hz), and plots the resulting waveform
+% over time.
+%
+
+%% 5.3a)
 fs = 8000;              % Sampling frequency
 t = 0:1/fs:0.85;        % Time vector from 0 to 0.85 seconds with 1/fs step
 xx = zeros(size(t));    % Initialize signal vector

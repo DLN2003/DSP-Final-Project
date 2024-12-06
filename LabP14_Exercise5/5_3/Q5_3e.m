@@ -1,4 +1,16 @@
-%% 5.3e) (by David Needens Nov. 2024)
+% Authored By: David Needens
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 5.3 Piano Octave Decoding
+% 
+% This code calculates the transient duration for each bandpass filter 
+% applied to different signal regions and visualizes the effects by 
+% plotting the filter outputs for the first 5 seconds, marking the 
+% transient duration with a red dashed line on each plot.
+%
+
+%% 5.3e)
 % Define filter length and sampling frequency
 L = length(h); % Filter length
 transientDuration = L / fs; % Transient duration in seconds

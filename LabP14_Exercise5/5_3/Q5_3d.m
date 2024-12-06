@@ -1,4 +1,15 @@
-%% 5.3d) (by David Needens Nov. 2024)
+% Authored By: David Needens
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 5.3 Piano Octave Decoding
+% 
+% This code performs validation of bandpass filters by applying them to 
+% different signal regions, analyzes the frequency responses, and compares 
+% the results against expected octave values to ensure accuracy.
+%
+
+%% 5.3d)
 % Frequency responses for validation
 filterOutputMaxFreq = zeros(3, numBands);
 regionIndex = [1, 0.25*fs; 0.3*fs, 0.55*fs; 0.6*fs, 0.85*fs];

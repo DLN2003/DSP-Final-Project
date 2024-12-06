@@ -1,4 +1,16 @@
-%% 5.3b) (by David Needens Nov. 2024)
+% Authored By: David Needens
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 5.3 Piano Octave Decoding
+% 
+% This MATLAB code sets up multiple bandpass filters based on predefined 
+% frequency bands, calculates their frequency responses using a Hamming 
+% window function, applies them to the signal xx in the time domain, 
+% and stores the filtered outputs for each band.
+%
+
+%% 5.3b)
 % Frequency bands for 5 BPF
 bands = [BP_Filters(2, "StartingFreq_Hz_"), BP_Filters(2, "EndingFreq_Hz_"); 
         BP_Filters(3, "StartingFreq_Hz_"), BP_Filters(3, "EndingFreq_Hz_"); 
