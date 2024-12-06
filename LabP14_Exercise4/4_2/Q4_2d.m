@@ -1,3 +1,14 @@
+% Authored By: Giovanni Gutierrez
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 4.2 A Better BPF
+%
+% This is simply an explanation of how the better
+% BPF works.
+%
+
+
 %% 4.2d) Use frequency response to explain why the filter only passes at cutoff
 
 % Observing the frequency response of the 41-length filter from 4.2a) we
