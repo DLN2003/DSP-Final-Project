@@ -1,3 +1,17 @@
+
+% Authored By: Giovanni Gutierrez
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 4.1 Bandpass Filter Design
+%
+% To Decode the piano Octaves we need to create a filter.
+% Bandpass filtering (BPF) is going to be the most useful
+% in this process. This code exemplifies the use of a
+% simple BPF to understand the process involved
+%
+
+
 %% 4.1a) Generate Bandpass with wc = 0.4*pi and L = 40, plot magnitude and phase response
 
 
