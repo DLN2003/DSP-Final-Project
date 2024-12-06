@@ -1,3 +1,17 @@
+% Authored By: Giovanni Gutierrez
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 4.2 A Better BPF
+%
+% Decoding our octaves will require a pretty low threshold
+% meaing that a simple bandpass filter will likely have too
+% much noise. To reduce the noise level we can use a windowing
+% operation. This BPF is designed with a Hamming window to reduce
+% noise from the side lobes.
+%
+
+
 %% 4.2a) Same as 4.1a) for new filter where wc = 0.25*pi and L = 41. Also, measure response at w = {0, 0.1*pi, 0.25*pi, 0.4*pi, 0.5*pi, 0.75*pi}
 clear
 
