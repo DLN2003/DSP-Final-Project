@@ -1,4 +1,4 @@
-%% 5.3a)
+%% 5.3a) (by David Needens Nov. 2024)
 fs = 8000;              % Sampling frequency
 t = 0:1/fs:0.85;        % Time vector from 0 to 0.85 seconds with 1/fs step
 xx = zeros(size(t));    % Initialize signal vector
