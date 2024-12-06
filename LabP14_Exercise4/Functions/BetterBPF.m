@@ -5,7 +5,9 @@
 % Reference 4 Lab Exercises
 %
 % This code defines a function that creates a BPF 
-% with a specified cutoff frequency without windowing
+% with a specified cutoff frequency, filter length, 
+% and DFT length; using a Hamming Window to reduce
+% noise from side lobes.
 % 
 
 
