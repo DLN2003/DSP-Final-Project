@@ -8,7 +8,7 @@
 % To Decode the piano Octaves we need to create a filter.
 % Bandpass filtering (BPF) is going to be the most useful
 % in this process. This code exemplifies the use of a
-% simple BPF to understand the process involved
+% simple BPF to help understand the process involved
 %
 
 
