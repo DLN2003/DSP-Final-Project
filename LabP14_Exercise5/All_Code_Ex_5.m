@@ -1,3 +1,13 @@
+% Authored By: Katie Henn, Cade Boynton, & David Needens
+%
+% Last Modified: Nov. 2024
+%
+% Reference 5 Lab Exercises
+%
+% A file that runs all the code used to complete
+% the section "5 Lab Exercises"
+%
+
 %% 5.1
 BP_Filters = readtable("Bandpass_Filters.xlsx"); % Load Bandpass filters from file
 BP_Filters(8:11,:) = []; % Removes unnecessary rows
