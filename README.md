@@ -87,7 +87,7 @@ Note that the filter response that has the larges magnitude of $`500 Hz`$ in the
 To reduce the transient response in the outputs, it is important to observe the signal after $`12.5 ms `$ since that is when we observed the steady state response dominates from. Figure 9 shows an example of the transient and steady-state behavior of the outputs for each filter given the same input we used in the previous example.
 
 ![Transient v SS R](Figures/16_Input_1_transientVstable.png "Transient v. steady state")
-Figure 9: Graph displays the response over time for each of the five filters given the first generated input.
+>Figure 9: Graph displays the response over time for each of the five filters given the first generated input.
 
 Something we notice here is that the output signal has some notable noise in the $`65-123 HZ`$ filter. This could be an issue with signal generation, or of filter length. This noise is overall small in the magnitude of the responses and isn't likely to cause an issue with analysis. Overall, the signal domiantes in the $`131-247 Hz`$ passband, as expected, and attentuates in all of the other octave filters still showing that the signal falls within the thrid octave. Further improvement of the process would evaluate the passband lengths from beginning to end and ensure that there isn't any notable octave overlap in the filter design.
 
