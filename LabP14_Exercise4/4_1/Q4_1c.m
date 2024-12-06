@@ -1,3 +1,17 @@
+% Authored By: Giovanni Gutierrez
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 4.1 Bandpass Filter Design
+%
+% This code demonstrates the effect of filter length on the
+% width of the passband in our BPF. Decreasing the width of 
+% The passband will be important in the future to tune our
+% analysis only to the desired octave for a given filter.
+%
+
+
+
 %% 4.1c) Make plots to measure the passband at L = 20 and L = 80 with wc the same; measure their passband widths
 
 % BPF for L = 20 using project function 
