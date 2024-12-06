@@ -1,3 +1,15 @@
+% Authored By: Giovanni Gutierrez
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises
+%
+% This code defines a function that creates a BPF 
+% with a specified cutoff frequency without windowing
+% 
+
+
+
 %% Better Bandpass filter (Used first in 4.2a)
 
 % Function for bandpass filter frequency response
