@@ -1,3 +1,15 @@
+% Authored By: Giovanni Gutierrez
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises
+%
+% This code defines a function that measures the
+% width of the passband for a given BPF based on
+% the desired threshold.
+% 
+
+
 %% Width of pass band (4.1b)
 
 % Function that finds passband width using the magnitude response, omega,
