@@ -1,3 +1,14 @@
+% Authored By: Giovanni Gutierrez
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises
+%
+% A file that runs all the code used to complete
+% the section "4 Lab Exercises"
+%
+
+
 %% Octave Band Filtering: Lab P-14: 4 Lab Exercises
 %% 4.1 Simple Bandpass Filter 
 % Use the impulse response of FIR: h(n) = (2/L)*cos(wc*n), 0 <= n < L
