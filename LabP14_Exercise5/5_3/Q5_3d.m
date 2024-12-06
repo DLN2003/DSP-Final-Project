@@ -1,4 +1,4 @@
-%% 5.3d) Validate Output Signals by Comparing Magnitudes and Phases
+%% 5.3d) (by David Needens Nov. 2024)
 % Frequency responses for validation
 filterOutputMaxFreq = zeros(3, numBands);
 regionIndex = [1, 0.25*fs; 0.3*fs, 0.55*fs; 0.6*fs, 0.85*fs];

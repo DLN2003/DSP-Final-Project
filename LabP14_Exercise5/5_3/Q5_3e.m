@@ -1,4 +1,4 @@
-%% 5.3e)
+%% 5.3e) (by David Needens Nov. 2024)
 % Define filter length and sampling frequency
 L = length(h); % Filter length
 transientDuration = L / fs; % Transient duration in seconds

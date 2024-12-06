@@ -1,4 +1,4 @@
-%% 5.3c)
+%% 5.3c) (by David Needens Nov. 2024)
 % Plot Frequency Responses for All Filters
 figure(11);
 for i = 1:numBands

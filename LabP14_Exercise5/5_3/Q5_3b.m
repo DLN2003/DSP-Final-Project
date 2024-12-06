@@ -1,4 +1,4 @@
-%% 5.3b)
+%% 5.3b) (by David Needens Nov. 2024)
 % Frequency bands for 5 BPF
 bands = [BP_Filters(2, "StartingFreq_Hz_"), BP_Filters(2, "EndingFreq_Hz_"); 
         BP_Filters(3, "StartingFreq_Hz_"), BP_Filters(3, "EndingFreq_Hz_"); 
