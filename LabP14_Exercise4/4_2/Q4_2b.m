@@ -1,3 +1,17 @@
+% Authored By: Giovanni Gutierrez
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 4.2 A Better BPF
+%
+% This code runs a similar analysis to 4.1c), providing
+% context for the usefulness of filter length in the design
+% process. The passband is wider than in the simple BPF 
+% design which is a cost of reducing the noise level with 
+% our Hamming window.
+%
+
+
 %% 4.2b) Find the passband width at a threshold level of 50%. Then plot the graphs for two more BPFs at L = 21 and L = 81 and get their passbands.
 
 % 50% of the maximum 10.88 is 5.44, so this defines our threshold. 
