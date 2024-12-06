@@ -1,3 +1,17 @@
+
+% Authored By: Giovanni Gutierrez
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 4.1 Bandpass Filter Design
+%
+% Knowing the range of frequencies that the BPF will 
+% pass represent the accepted frequencies of the filter.
+% With a chosen threshold this code utilizes a project fxn
+% designed to measure the width of the passband.
+%
+
+
 %% 4.1b) Using the 0.5 level passband, find width of passband 
 
 % Use Project function to define the pass band width
