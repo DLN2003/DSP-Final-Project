@@ -1,0 +1,12 @@
+# Link
+
+https://github.com/DLN2003/DSP-Final-Project.git
+
+# Contributors to the GitHub Project
+
+         Name                    Username
+      ----------             ----------------
+   Giovanni Gutierrez          Zylo-Shadows
+     David Needens               DNL2003
+      Cade Boynton             CadeBoynton
+      Katie Henn                  hennk8

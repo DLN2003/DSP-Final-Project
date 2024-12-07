@@ -1,0 +1,35 @@
+# Breakdown of Project Responsibilities
+
+---
+## 4 Lab Exercises
+
+4.1 Simple Bandpass Filter Design
+a) Giovanni
+b) Giovanni
+c) Giovanni
+4.2 A Better BPF
+a) Giovanni 
+b) Giovanni
+c) Giovanni
+d) Giovanni
+
+---
+## 5 Lab exercises
+
+5.1 Piano Octaves
+a) Katie
+b) Katie
+5.2 Bandpass Filter Bank Design
+a_a) Not possible according to Lab?
+a_b) Cade
+b) Cade
+c) Cade
+d) Cade
+5.3 Piano Octave Decoding
+a)David
+b)David
+c)David
+d)David
+e)David
+
+Presentation: Each finish and present on the section they completed in the project
