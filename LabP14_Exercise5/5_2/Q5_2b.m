@@ -1,3 +1,14 @@
+% Authored By: Cade Boynton
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 5.2 Piano Octave Decoding
+%
+% 
+% This MATLAB code sets the lenght of the filters to acheive the correct
+% bandwidth for each octave 1-7. The values of L were found through trial
+% and error.
+%
 %% 5.2b)
 wc = BP_Filters.CenterFreq_omegaC_;
 N = 2048; % # of Points for the DFT

@@ -1,3 +1,14 @@
+% Authored By: Cade Boynton
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 5.2 Piano Octave Decoding
+%
+% 
+% This MATLAB code generates the frequency response for each octaves
+% Normalized Hanning filter. Here we also display the frequency response
+% and center frequency for each filter.
+%
 %% 5.2c)
 HOct7 = HammingNorm(wc(7),L(7),N);
 HOct6 = HammingNorm(wc(6),L(6),N);

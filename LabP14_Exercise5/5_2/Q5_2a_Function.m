@@ -1,3 +1,14 @@
+% Authored By: Cade Boynton
+%
+% Last Modified: Nov. 2024
+%
+% Reference 4 Lab Exercises: 5.2 Piano Octave Decoding
+%
+% 
+% This MATLAB function generates a normalized Hanning Bandpass Filter given
+% center frequency (wc), filter length (L), and number of points for the
+% Fourier transform (N).
+%
 %% 5.2a) 
 % Normalized Hanning Bandpass Filter (5.2)
 
