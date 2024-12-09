@@ -133,7 +133,7 @@ Giovanni Gutierrez, David Needens, Cade Boynton, Katie Henn
 ---
 
 ### Refereneces
--[1]Lab Provided within the OctaveBandFiltLab.pdf in the main directory of the project
--[2]R. M. Mottola, “Liutaio Mottola Lutherie Information Website,” Liutaio Mottola Lutherie Information Website, 2024. https://liutaiomottola.com/ (accessed Dec. 02, 2024).
+- [1]Lab Provided within the OctaveBandFiltLab.pdf in the main directory of the project
+- [2]R. M. Mottola, “Liutaio Mottola Lutherie Information Website,” Liutaio Mottola Lutherie Information Website, 2024. https://liutaiomottola.com/ (accessed Dec. 02, 2024).
 
 
