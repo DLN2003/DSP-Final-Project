@@ -95,10 +95,10 @@ Something we notice here is that the output signal has some notable noise in the
 
 ## Appendix
 ### Running the Code
-1. Ensure MATLAB/Octave is installed.  
-2. Place all required files in the working directory, including:
+1. Ensure MATLAB is installed.  
+2. Ensure all required files in the "Project_Code"  directory, including:
    - `Bandpass_Filters.xlsx`
-   - Custom functions: `BPFsimp.m`, `PBWidth.m`, `BPFbetter.m`, `HammingNorm.m`.  
+   - `Problem_4_2c.png`
 3. Run the script to generate all figures and results.  
 
 ---
@@ -128,10 +128,7 @@ Something we notice here is that the output signal has some notable noise in the
 ---
 
 ### Authors
-Giovanni Gutierrez
-David Needens
-Cade Boynton
-Katie Henn
+Giovanni Gutierrez, David Needens, Cade Boynton, Katie Henn
 
 ---
 
